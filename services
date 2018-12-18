@@ -1,0 +1,83 @@
+#!/bin/bash
+#
+#  Command Line Interface to start all services associated with the Getting-Started Tutorial
+#
+#  For this tutorial the commands are merely a convenience script to run docker-compose
+#
+
+set -e
+
+loadData () {
+	printf "Loading context data "
+	./import-data
+	echo -e " \033[1;32mdone\033[0m"
+	printf "Provisioning IoT devices "
+	./provision-devices
+	echo -e " \033[1;32mdone\033[0m"
+	waitToConnect
+	echo ""
+}
+
+waitToConnect () {
+	printf "Connecting \033[1;31mKeyrock\033[0m to \033[1;30mMySQL\033[0m "
+	for value in {1..5}
+	do
+		sleep 1
+		printf "."
+	done
+	echo -e " \033[1;32mdone\033[0m"
+}
+
+startContainers () {
+	echo ""
+	export IDM_HTTPS_ENABLED="$1" 
+	docker-compose --log-level ERROR -f docker-compose.yml -p fiware up -d --remove-orphans
+	echo ""
+}
+
+stoppingContainers () {
+	echo "Stopping containers"
+	docker-compose --log-level ERROR -f docker-compose.yml  -p fiware down -v --remove-orphans
+}
+
+if (( $# != 1 )); then
+    echo "Illegal number of parameters"
+    echo "usage: services [create|start|stop]"
+    exit 1
+fi
+
+command="$1"
+case "${command}" in
+	"help")
+        echo "usage: services [create|start|stop]"
+        ;;
+    "start")
+		stoppingContainers
+		echo -e "Starting seven containers \033[1;34mOrion\033[0m, \033[1;36mIoT-Agent\033[0m, \033[1;31mKeyrock\033[0m, \033[1;31mWilma\033[0m, \033[1;30mTutorial\033[0m and \033[1;30mMongoDB\033[0m and \033[1;30mMySQL\033[0m databases."
+		echo -e "- \033[1;34mOrion\033[0m is the context broker"
+		echo -e "- \033[1;36mIoT-Agent\033[0m is configured for the UltraLight Protocol"
+		echo -e "- \033[1;30mTutorial\033[0m acts as a series of dummy IoT Sensors over HTTP"
+		echo -e "- \033[1;31mKeyrock\033[0m is an Identity Management Front-End"
+		echo -e "- \033[1;31mWilma\033[0m is a PEP Proxy for Orion"
+		echo -e "- \033[1;31mAuthZforce\033[0m is a XACML Authorization Server"
+		startContainers false
+		loadData
+		echo ""
+		echo -e "Now open \033[4mhttp://localhost:3000\033[0m"
+		;;
+	"stop")
+		stoppingContainers
+		;;
+	"create")
+		echo "Pulling Docker images"
+		docker-compose --log-level ERROR -p fiware pull
+		;;
+	*)
+		echo "Command not Found."
+		echo "usage: services [create|start|stop|stop]"
+		exit 127;
+		;;
+esac
+
+
+
