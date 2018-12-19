@@ -451,7 +451,7 @@ exports.Authzforce.prototype.policyDomainRequest = function(
   resource,
   action
 ) {
-  let body = 'let body =
+  let body =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<Request xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" CombinedDecision="false" ReturnPolicyIdList="false">\n';
   // Code to create the XML body for the request is omitted
