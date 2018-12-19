@@ -36,11 +36,15 @@ TBD
 
 TBD
 
+## XACML
+
+
+
 # Prerequisites
 
 ## Docker
 
-To keep things simple both components will be run using
+To keep things simple all components will be run using
 [Docker](https://www.docker.com). **Docker** is a container technology which
 allows to different components isolated into their respective environments.
 
@@ -109,7 +113,7 @@ Therefore the overall architecture will consist of the following elements:
 -   FIWARE [Authzforce](https://fiware-pep-proxy.rtfd.io/) is a XACML Server providing an interpretive Policy Decision Point (PDP)
     access to the **Orion** and/or **IoT Agent** microservices
 -   FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) is a PEP Proxy securing
-    access to the **Orion** microservices, it requests authoriation decisions from **Authzforce**
+    access to the **Orion** microservices, it requests authorisation decisions from **Authzforce**
 -   The underlying [MongoDB](https://www.mongodb.com/) database :
     -   Used by the **Orion Context Broker** to hold context data information
         such as data entities, subscriptions and registrations
@@ -135,7 +139,7 @@ entities can be containerized and run from exposed ports.
 
 The specific architecture of each section of the tutorial is discussed below.
 
-## Keyrock
+## Keyrock Configuration
 
 ```yaml
   keyrock:
@@ -187,7 +191,7 @@ The other `keyrock` container configuration values described in the YAML file
 have been described in previous tutorials
 
 
-## Securing Orion - PEP Proxy Configuration
+## PEP Proxy Configuration
 
 ```yaml
   orion-proxy:
@@ -238,11 +242,10 @@ The `orion-proxy` container is delegating PDP decisions to **Authzforce** and is
 | PEP_PROXY_AZF_PORT           | `8080`                     |   Port that **Authzforce** is listening on |
 
 
-
 The other `orion-proxy` container configuration values described in the YAML file
 have been described in previous tutorials
 
-## Authzforce
+## Authzforce Configuration
 
 ```yaml
   authzforce:
@@ -381,9 +384,123 @@ reason to be granted access
 | rob     | rob@example.com     | `test`   |
 
 
+# XACML-based - Access Control
 
 
-## PDP Access Control - Running the Example
+There are three Levels of PDP Access Control:
+
+* Level 1: Authentication Access - Allow all actions to every signed in user and no actions to an anonymous user.
+* Level 2: Basic Authorization - Check which resources and verbs the currently logged in user should have access to
+* Level 3: Advanced Authorization - Fine grained control through XACML
+
+Access control levels 1 and 2 can be fulfilled using **Keyrock** alone or in conjunction with a PEP Proxy - these have been covered in [previous tutorials](https://github.com/Fiware/tutorials.Securing-Access).
+Level 3 access control can be provided by adding **Authzforce**.
+
+## Advanced Authorization
+
+xxx
+
+### Advanced Authorization - Sample Code
+
+```javascript
+function authorizeAdvancedXACML(req, res, next, resource = req.url) {
+
+  const keyrockUserUrl =
+    keyrockIPAddress +
+    '/user' +
+    '?access_token=' +
+    req.session.access_token +
+    '&app_id=' +
+    clientId +
+    '&authzforce=true';
+
+  return oa
+    .get(keyrockUserUrl)
+    .then(response => {
+      const user = JSON.parse(response);
+      return azf.policyDomainRequest(
+        user.app_azf_domain,
+        user.roles,
+        resource,
+        req.method
+      );
+    })
+    .then(authzforceResponse => {
+      res.locals.authorized = authzforceResponse === 'Permit';
+      return next();
+    })
+    .catch(error => {
+      debug(error);
+      res.locals.authorized = false;
+      return next();
+    });
+}
+```
+
+```javascript
+exports.Authzforce.prototype.policyDomainRequest = function(
+  domain,
+  roles,
+  resource,
+  action
+) {
+  const that = this;
+
+  let body =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<Request xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" CombinedDecision="false" ReturnPolicyIdList="false">\n';
+
+  if (roles.length > 0) {
+    for (const i in roles) {
+      body =
+        body +
+        '  <Attributes Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject">\n' +
+        '     <Attribute AttributeId="urn:oasis:names:tc:xacml:2.0:subject:role" IncludeInResult="false">\n' +
+        '        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">' +
+        roles[i].id +
+        '</AttributeValue>\n' +
+        '     </Attribute>\n' +
+        '  </Attributes>\n';
+    }
+  }
+
+
+  body = 'let body =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<Request xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" CombinedDecision="false" ReturnPolicyIdList="false">\n';
+   /// Code to create the XML body for the request is omitted
+  body = body +  '</Request>';
+
+
+  const options = {
+    method: 'POST',
+    url: authzforceUrl + '/authzforce-ce/domains/' + domain + '/pdp',
+    headers: { 'Content-Type': 'application/xml' },
+    body
+  };
+
+  return new Promise((resolve, reject) => {
+    request(options, function(error, response, body) {
+      let decision;
+      xml2js.parseString(
+        body,
+        { tagNameProcessors: [xml2js.processors.stripPrefix] },
+        function(err, jsonRes) {
+          decision = jsonRes.Response.Result[0].Decision[0];
+        }
+      );
+      decision = String(decision);
+      return error ? reject(error) : resolve(decision);
+    });
+  });
+};
+```
+
+## PEP Proxy - Advanced  Authorization
+
+describe
+
+## XACML-based Access Control - Running the Example
 
 > **Note** Five resources have been secured at level 3:
 >
