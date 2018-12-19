@@ -393,25 +393,30 @@ There are three Levels of PDP Access Control:
 * Level 2: Basic Authorization - Check which resources and verbs the currently logged in user should have access to
 * Level 3: Advanced Authorization - Fine grained control through XACML
 
-Access control levels 1 and 2 can be fulfilled using **Keyrock** alone or in conjunction with a PEP Proxy - these have been covered in [previous tutorials](https://github.com/Fiware/tutorials.Securing-Access).
+Access control levels 1 and 2 can be fulfilled using **Keyrock** alone or with or without an associated PEP Proxy - these have been covered in [previous tutorials](https://github.com/Fiware/tutorials.Securing-Access).
 Level 3 access control can be provided by adding **Authzforce**.
 
 ## Advanced Authorization
 
-xxx
+Advanced Authorization is able to deal with complex rulesets. Permissions are no longer merely based on a fixed role, resource and an action, but can be extended as necessary.
+
+For example users in role `XXX` can access URL **starting with** `YYY` provided that the HTTP verb **is either**  `GET`, `PUT` or `POST`. Such users may also `DELETE` **provided that** they were the creator in the first place.
+
+Within the tutorial programatic example we are using our own trusted instance of Keyrock - once a user has signed in and obtained an `access_token`, the `access_token` can be stored in session and used to retrieve user details on demand. All access to the Orion context broker is hidden behind a PEP Proxy. Whenever a request is made to Orion, the `access_token` is passed in the header of the request, and the PEP proxy handles the decision to whether to execute the request.
+
+
 
 ### Advanced Authorization - Sample Code
+
+Programmatically, any Policy Execution Point consists of two parts, an oAuth request to Keyrock retrieves information about the user (such as the assigned roles) as well as the policy domain to be queried.
+
+A second request is sent to the relevant domain endpoint within Authzforce, providing all of the information necessary for Authzforce to provide a judgement. Authzforce responds with a **permit** or **deny** response, and the decision whether to continue can be made thereafter.
 
 ```javascript
 function authorizeAdvancedXACML(req, res, next, resource = req.url) {
 
-  const keyrockUserUrl =
-    keyrockIPAddress +
-    '/user' +
-    '?access_token=' +
-    req.session.access_token +
-    '&app_id=' +
-    clientId +
+  const keyrockUserUrl ='http://keyrock/user?access_token=' +
+    req.session.access_token + '&app_id=' + clientId +
     '&authzforce=true';
 
   return oa
@@ -437,6 +442,8 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
 }
 ```
 
+The full code to supply each request to Authzforce can be found within the tutorials' [Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/context-provider/lib/azf.js) - the actual information to supply will depend on business use case - it could be expanded to include temporal information, relationships between records and so on, but in this very simple example only roles are necessary.
+
 ```javascript
 exports.Authzforce.prototype.policyDomainRequest = function(
   domain,
@@ -444,48 +451,28 @@ exports.Authzforce.prototype.policyDomainRequest = function(
   resource,
   action
 ) {
-  const that = this;
-
-  let body =
+  let body = 'let body =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<Request xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" CombinedDecision="false" ReturnPolicyIdList="false">\n';
-
-  if (roles.length > 0) {
-    for (const i in roles) {
-      body =
-        body +
-        '  <Attributes Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject">\n' +
-        '     <Attribute AttributeId="urn:oasis:names:tc:xacml:2.0:subject:role" IncludeInResult="false">\n' +
-        '        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">' +
-        roles[i].id +
-        '</AttributeValue>\n' +
-        '     </Attribute>\n' +
-        '  </Attributes>\n';
-    }
-  }
-
-
-  body = 'let body =
-    '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<Request xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" CombinedDecision="false" ReturnPolicyIdList="false">\n';
-   /// Code to create the XML body for the request is omitted
+  // Code to create the XML body for the request is omitted
   body = body +  '</Request>';
-
 
   const options = {
     method: 'POST',
-    url: authzforceUrl + '/authzforce-ce/domains/' + domain + '/pdp',
+    url: 'http://authzforceUrl/authzforce-ce/domains/' + domain + '/pdp',
     headers: { 'Content-Type': 'application/xml' },
     body
   };
 
   return new Promise((resolve, reject) => {
     request(options, function(error, response, body) {
+      const xml2js = require('xml2js');
       let decision;
       xml2js.parseString(
         body,
         { tagNameProcessors: [xml2js.processors.stripPrefix] },
         function(err, jsonRes) {
+          // The decision is found within the /Response/Result[0]/Decision[0] XPath
           decision = jsonRes.Response.Result[0].Decision[0];
         }
       );
@@ -496,9 +483,12 @@ exports.Authzforce.prototype.policyDomainRequest = function(
 };
 ```
 
-## PEP Proxy - Advanced  Authorization
+### Advanced Authorization via PEP Proxy
 
-describe
+Applying advanced  authorization within a PEP proxy requires
+very similar code to the programmatic example described above. The **Wilma** generic enabler extracts a token from the header supplied by the request and makes a request to **Keyrock** to obtain further information about the user. A PDP request is then made to **Authzforce** to decide whether to procede.
+
+Obviously any scalable solution should also cache information about the PDP requests made and the responses to avoid making unnecessary requests.
 
 ## XACML-based Access Control - Running the Example
 
