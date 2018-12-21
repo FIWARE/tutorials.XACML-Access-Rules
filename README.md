@@ -17,7 +17,37 @@ application and demonstrates examples of **Authzforce** XACML Server-PDP interac
 
 # Contents
 
-TBD
+- [Ruleset Based Permissions](#ruleset-based-permissions)
+  * [What is XACML](#what-is-xacml)
+- [Prerequisites](#prerequisites)
+  * [Docker](#docker)
+  * [Cygwin](#cygwin)
+- [Architecture](#architecture)
+  * [Keyrock Configuration](#keyrock-configuration)
+  * [PEP Proxy Configuration](#pep-proxy-configuration)
+  * [Authzforce Configuration](#authzforce-configuration)
+  * [Tutorial Security Configuration](#tutorial-security-configuration)
+- [Start Up](#start-up)
+    + [Dramatis Personae](#dramatis-personae)
+- [Using an XACML Server](#using-an-xacml-server)
+  * [Reading XACML Rulesets](#reading-xacml-rulesets)
+    + [Authzforce - Obtain Version Information](#authzforce---obtain-version-information)
+    + [:two: List all domains](#two-list-all-domains)
+    + [Read a single domain](#read-a-single-domain)
+    + [List all PolicySets available within a Domain](#list-all-policysets-available-within-a-domain)
+    + [List the available revisions of a PolicySet](#list-the-available-revisions-of-a-policyset)
+    + [Read a single version of a PolicySet](#read-a-single-version-of-a-policyset)
+  * [Requesting Policy Decisions](#requesting-policy-decisions)
+    + [Permit Access to a Resource](#permit-access-to-a-resource)
+    + [Deny Access to a Resource](#deny-access-to-a-resource)
+- [PDP - Advanced Authorization](#pdp---advanced-authorization)
+  * [Advanced Authorization](#advanced-authorization)
+    + [User Obtains an Access Token](#user-obtains-an-access-token)
+    + [Obtain Roles and Domain](#obtain-roles-and-domain)
+    + [Apply a Policy to a Request](#apply-a-policy-to-a-request)
+    + [Advanced Authorization - Sample Code](#advanced-authorization---sample-code)
+    + [Advanced Authorization - PEP Proxy](#advanced-authorization---pep-proxy)
+  * [PDP - Advanced Authorization - Running the Example](#pdp---advanced-authorization---running-the-example)
 
 # Ruleset Based Permissions
 
@@ -388,7 +418,16 @@ reason to be granted access
 
 ## Reading XACML Rulesets
 
+`<PolicySet>`
+
+
+
+
 ### Authzforce - Obtain Version Information
+
+Once **Authzforce** is running, you can check the status by making an HTTP request to
+the exposed administration port (usually `8080`. If the response is blank, this is usually
+because **Authzforce** is not running or is listening on another port.
 
 #### :one: Request
 
@@ -400,13 +439,25 @@ curl -X GET \
 
 #### Response
 
+The response returns information about the version of Authzforce.
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<productMetadata xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:ns2="http://www.w3.org/2005/Atom" xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6" name="AuthzForce CE Server" version="8.0.1" release_date="2017-12-05" uptime="P0Y0M0DT0H8M47.642S" doc="https://authzforce.github.io/fiware/authorization-pdp-api-spec/5.2/"/>
+<productMetadata xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5"
+   xmlns:ns2="http://www.w3.org/2005/Atom" 
+   xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+   xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" 
+   xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6" 
+   name="AuthzForce CE Server" 
+   version="8.0.1" 
+   release_date="2017-12-05" 
+   uptime="P0Y0M0DT0H8M47.642S" 
+   doc="https://authzforce.github.io/fiware/authorization-pdp-api-spec/5.2/"/>
 ```
 
 ### List all domains
 
+To request domain information from **Authzforce**, make a request to the `/authzforce-ce/domains` endpoint.
 
 #### :two: Request
 
@@ -415,19 +466,30 @@ curl -X GET \
   http://localhost:8080/authzforce-ce/domains
 ```
 
-
-
-
 #### Response
+
+The response lists the domains which are available in **Authzforce**. This
+corresponds to the directory structure uploaded to **Authzforce** on start-up.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resources xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:ns2="http://www.w3.org/2005/Atom" xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
+<resources xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" 
+  xmlns:ns2="http://www.w3.org/2005/Atom" 
+  xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+  xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" 
+  xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
     <ns2:link rel="item" href="gQqnLOnIEeiBFQJCrBIBDA" title="gQqnLOnIEeiBFQJCrBIBDA"/>
 </resources>
 ```
 
 ### Read a single domain
+
+To read information about a domain, and to explore further, make a request to the
+`authzforce-ce/domains/{{domain-id}}` endpoint.  The following request obtains 
+information about the `gQqnLOnIEeiBFQJCrBIBDA` domain, which has been generated using
+using a random key by an external Policy Adminstration Point in this case **Keyrock**
+has been used as the PAP, and pre-generated the rule sets.
+
 
 #### :three: Request
 
@@ -438,19 +500,30 @@ curl -X GET \
 
 #### Response
 
+The response lists more information about the domain, including the id used within **Keyrock**
+(`tutorial-dckr-site-0000-xpresswebapp`)
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<domain xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:ns2="http://www.w3.org/2005/Atom" xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
+<domain xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" 
+  xmlns:ns2="http://www.w3.org/2005/Atom" 
+  xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+  xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" 
+  xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
     <properties externalId="tutorial-dckr-site-0000-xpresswebapp"/>
     <childResources>
         <ns2:link rel="item" href="/properties" title="Domain properties"/>
         <ns2:link rel="item" href="/pap" title="Policy Administration Point"/>
-        <ns2:link rel="http://docs.oasis-open.org/ns/xacml/relation/pdp" href="/pdp" title="Policy Decision Point"/>
+        <ns2:link rel="http://docs.oasis-open.org/ns/xacml/relation/pdp" 
+          href="/pdp" title="Policy Decision Point"/>
     </childResources>
 </domain>
 ```
 
 ### List all PolicySets available within a Domain
+
+To list the generated ids for all of the PolicySets found within a domain make a request to the `authzforce-ce/domains/{{domain-id}}/pap/policies` endpoint. The following request obtains a list of a given policy ids found 
+within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
 #### :four: Request
 
@@ -461,15 +534,24 @@ curl -X GET \
 
 #### Response
 
+The response returns a list of available revisions of the given policy which are available within. the **Authzforce** container. This corresponds the named XML files `1.xml`, `2.xml` etc.
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resources xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:ns2="http://www.w3.org/2005/Atom" xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
+<resources xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" 
+  xmlns:ns2="http://www.w3.org/2005/Atom" 
+  xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+  xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" 
+  xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
     <ns2:link rel="item" href="f8194af5-8a07-486a-9581-c1f05d05483c"/>
     <ns2:link rel="item" href="root"/>
 </resources>
 ```
 
 ### List the available revisions of a PolicySet
+
+To list the available revisions of a policy, make a request to the `authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}` endpoint. Available policy id are randomly generated, and can be obtained by drilling down
+using the previous request. The following request obtains a list revision of a given policy found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
 #### :five: Request
 
@@ -482,9 +564,15 @@ curl -X GET \
 
 #### Response
 
+The response returns a list of available revisions of the given policy which are available within the **Authzforce** container. This corresponds the named XML files `1.xml`, `2.xml` etc.
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<resources xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:ns2="http://www.w3.org/2005/Atom" xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
+<resources xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" 
+  xmlns:ns2="http://www.w3.org/2005/Atom" 
+  xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+  xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" 
+  xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
     <ns2:link rel="item" href="2"/>
     <ns2:link rel="item" href="1"/>
 </resources>
@@ -495,6 +583,8 @@ curl -X GET \
 
 ### Read a single version of a PolicySet
 
+To obtain a single revison of a `<PolicySet>`, make a request to the `authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}/{{revision-number}}` endpoint. The following request obtains the second revision of the given policy found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
+
 #### :six: Request
 
 ```console
@@ -504,12 +594,21 @@ curl -X GET \
 
 #### Response
 
+The response contains the full `<PolicySet>` for the given revision. This is a copy of [the file](https://github.com/Fiware/tutorials.XACML-Access-Rules/blob/master/authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/2.xml) held 
+within **Authzforce**.
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns3:PolicySet xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" xmlns:ns2="http://www.w3.org/2005/Atom" xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6" PolicySetId="f8194af5-8a07-486a-9581-c1f05d05483c" Version="2" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:3.0:policy-combining-algorithm:deny-unless-permit">
+<ns3:PolicySet xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" 
+  xmlns:ns2="http://www.w3.org/2005/Atom" 
+  xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+  xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" 
+  xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6" PolicySetId="f8194af5-8a07-486a-9581-c1f05d05483c" Version="2" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:3.0:policy-combining-algorithm:deny-unless-permit">
     <ns3:Description>Policy Set for application tutorial-dckr-site-0000-xpresswebapp</ns3:Description>
     <ns3:Target/>
-    <ns3:Policy PolicyId="security-role-0000-0000-000000000000" Version="1.0" RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-unless-permit">
+    <ns3:Policy PolicyId="security-role-0000-0000-000000000000" 
+      Version="1.0" 
+      RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-unless-permit">
         <ns3:Description>Role security-role-0000-0000-000000000000 from application tutorial-dckr-site-0000-xpresswebapp</ns3:Description>
         <ns3:Target>
            ...etc
@@ -525,7 +624,25 @@ curl -X GET \
 
 ## Requesting Policy Decisions
 
+For the purpose of this tutorial, **Authzforce** has been supplied with the same basic rules as used in the Securing Access tutorial:
+
+
+*  The unlock door command can only be sent by Security staff.
+
+sending the ring bell command
+access to the price-change area
+access to the order-stock area
+
+
+To request a decision from Authzforce, a structured request containing all relevant information must be sent to the  `domains/{domain-id}/pdp` endpoint. In this case, the Body of the request includes information such as the roles that 
+the User has, the application id that is being requested (`tutorial-dckr-site-0000-xpresswebapp`) and the HTTP verb and resource that are being requested ( a GET request 
+on  the `/app/price-change` URL). Obviously the information passed in the Body can be expanded as the rules become
+more complex.
+
 ### Permit Access to a Resource
+
+To request a decision from Authzforce, make a POST requets to the `domains/{domain-id}/pdp` endpoint. In this cae
+the user has the `managers-role-0000-0000-000000000000` and is requesting access the the `/app/price-change` resource.
 
 #### :seven: Request
 
@@ -559,7 +676,27 @@ curl -X POST \
 
 #### Response
 
+The `managers-role-0000-0000-000000000000` permits access to the `/app/price-change` endpoint.
+The response for a successful request includes a `<Decision>` element to `Permit` to the resource.
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:Response xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" 
+  xmlns:ns2="http://www.w3.org/2005/Atom" 
+  xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+  xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0"
+  xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
+    <ns3:Result>
+        <ns3:Decision>Permit</ns3:Decision>
+    </ns3:Result>
+</ns3:Response>
+```
+
 ### Deny Access to a Resource
+
+To request a decision from Authzforce, make a POST requets to the `domains/{domain-id}/pdp` endpoint. In this cae
+the user has the `security-role-0000-0000-000000000000` and is requesting access the the `/app/price-change` resource.
 
 #### :eight: Request
 
@@ -593,6 +730,22 @@ curl -X POST \
 
 #### Response
 
+The `security-role-0000-0000-000000000000` does not permit access to the `/app/price-change` endpoint.
+The response  for an unsuccessful request includes a `<Decision>` element which will `Deny` to the resource.
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:Response xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" 
+  xmlns:ns2="http://www.w3.org/2005/Atom" 
+  xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+  xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" 
+  xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
+    <ns3:Result>
+        <ns3:Decision>Deny</ns3:Decision>
+    </ns3:Result>
+</ns3:Response>
+
 
 
 # PDP - Advanced Authorization
@@ -604,7 +757,7 @@ As a reminder, there are three Levels of PDP Access Control:
 * Level 2: Basic Authorization - Check which resources and verbs the currently logged in user should have access to
 * Level 3: Advanced Authorization - Fine grained control through [XACML](https://en.wikipedia.org/wiki/XACML)
 
-Within FIWARE, level 3 access control can be provided by adding **Authzforce** to the existing security microservices (IDM and PEP Proxy) of the infrastructure. Access control levels 1 and 2 have been covered in [previous tutorials](https://github.com/Fiware/tutorials.Securing-Access) and can be fulfilled using **Keyrock** alone or with or without an associated PEP Proxy.
+Within FIWARE, Level 3 access control can be provided by adding **Authzforce** to the existing security microservices (IDM and PEP Proxy) within the  Smart Application infrastructure. Access control levels 1 and 2 have been covered in [previous tutorials](https://github.com/Fiware/tutorials.Securing-Access) and can be fulfilled using **Keyrock** alone or with or without an associated PEP Proxy.
 
 ## Advanced Authorization
 
@@ -616,6 +769,12 @@ Within the tutorial programatic example we are using our own trusted instance of
 
 ### User Obtains an Access Token
 
+In order to identify themselves, every user must obtain an access token, in order to do so, they must use one of the
+OAuth2 access grants described in a [previous tutorial](https://github.com/Fiware/tutorials.Securing-Access). 
+
+To log in using the user-credentials flow send a POST request to the `oauth2/token` endpoint of **Keyrock** with
+the `grant_type=password`
+
 #### :nine: Request
 
 ```console
@@ -623,10 +782,25 @@ curl -X POST \
   http://localhost:3005/oauth2/token \
   -H 'Accept: application/json' \
   -H 'Authorization: Basic dHV0b3JpYWwtZGNrci1zaXRlLTAwMDAteHByZXNzd2ViYXBwOnR1dG9yaWFsLWRja3Itc2l0ZS0wMDAwLWNsaWVudHNlY3JldA==' \
-  -H 'Content-Type: application/x-www-form-urlencoded'
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'username=bob-the-manager@test.com&password=test&grant_type=password'
 ```
 
 #### Response
+
+The response returns an `access_token` to identify the user (in this case Bob the Manager)
+
+```json
+{
+    "access_token": "08fef363c429cb34cfff3f56dfe751a8d1890690",
+    "token_type": "Bearer",
+    "expires_in": 3599,
+    "refresh_token": "35a644094b598cb0d720fcb323369a53820a6a44",
+    "scope": [
+        "bearer"
+    ]
+}
+```
 
 ### Obtain Roles and Domain
 
@@ -634,12 +808,53 @@ curl -X POST \
 
 ```console
 curl -X GET \
-  'http://localhost:3005/user?access_token=1b88827586409b3b4dc67378e6b945c99b94c6cf&app_id=tutorial-dckr-site-0000-xpresswebapp&authzforce=true'
+  'http://localhost:3005/user?access_token={{access_token}}&app_id={{app-id}}&authzforce=true'
 ```
+
+Where :
+
+* `{{access-token}}` is the current access token of a logged in user e.g. 08fef363c429cb34cfff3f56dfe751a8d1890690
+* `{{app-id}}` holds the application to request `tutorial-dckr-site-0000-xpresswebapp`
+and `authzforce=true` indicates that we want to obtain an **Authzforce** Domain from **Keyrock**
 
 #### Response
 
+The response include an `authorization_decision` attribute which denies direct access for the request, 
+but includes additional information so that an additional request a decision from **Authzforce**
+
+In the example below the access token used belonged to Bob the manager, and his roles and the `app_azf_domain` 
+associated to the `app-id` are returned.
+
+```json
+{
+    "organizations": [],
+    "displayName": "",
+    "roles": [
+        {
+            "id": "managers-role-0000-0000-000000000000",
+            "name": "Management"
+        }
+    ],
+    "app_id": "tutorial-dckr-site-0000-xpresswebapp",
+    "trusted_apps": [],
+    "isGravatarEnabled": false,
+    "email": "bob-the-manager@test.com",
+    "id": "bbbbbbbb-good-0000-0000-000000000000",
+    "authorization_decision": "",
+    "app_azf_domain": "gQqnLOnIEeiBFQJCrBIBDA",
+    "eidas_profile": {},
+    "username": "bob"
+}
+```
+
+
+
+
 ### Apply a Policy to a Request
+
+To request a decision from Authzforce, a structured request containing all relevant information must be sent to the  `domains/{domain-id}/pdp` endpoint. In this case, the Body of the request includes information such as the roles that 
+the User has (`managers-role-0000-0000-000000000000`), the application id that is being requested (`tutorial-dckr-site-0000-xpresswebapp`) and the HTTP verb and resource that are being requested ( a POST request 
+on  the `/v2/entities` URL)
 
 #### :one::one: Request
 
@@ -672,6 +887,21 @@ curl -X POST \
 ```
 
 #### Response
+
+The response includes a `<Decision>` element which will either `Permit` or `Deny` the request.
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:Response xmlns="http://authzforce.github.io/rest-api-model/xmlns/authz/5" 
+  xmlns:ns2="http://www.w3.org/2005/Atom" 
+  xmlns:ns3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" 
+  xmlns:ns4="http://authzforce.github.io/core/xmlns/pdp/6.0" 
+  xmlns:ns5="http://authzforce.github.io/pap-dao-flat-file/xmlns/properties/3.6">
+    <ns3:Result>
+        <ns3:Decision>Permit</ns3:Decision>
+    </ns3:Result>
+</ns3:Response>
+```
 
 
 
