@@ -253,8 +253,8 @@ Therefore the overall architecture will consist of the following elements:
     -   A site graphical frontend for Identity Management Administration
     -   An equivalent REST API for Identity Management via HTTP requests
 -   FIWARE [Authzforce](https://authzforce-ce-fiware.readthedocs.io/) is a XACML
-    Server providing an interpretive Policy Decision Point (PDP) access to the
-    **Orion** and/or **IoT Agent** microservices
+    Server providing an interpretive Policy Decision Point (PDP) protecting access to resources
+    such as **Orion** and the tutorial application.
 -   FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) is a PEP Proxy securing
     access to the **Orion** microservices, it delegates the passing of
     authorisation decisions to **Authzforce** PDP
