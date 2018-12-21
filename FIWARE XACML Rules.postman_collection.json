@@ -1,0 +1,451 @@
+{
+	"info": {
+		"_postman_id": "6554748b-8871-4e83-8c4d-7ab315f9894a",
+		"name": "FIWARE XACML Rules",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Reading XACML Access Rules",
+			"item": [
+				{
+					"name": "Authzforce - Obtain Version Information",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/version",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"version"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all domains",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/domains",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"domains"
+							]
+						},
+						"description": "x"
+					},
+					"response": []
+				},
+				{
+					"name": "Read a single domain",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/domains/{{domain-id}}",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"domains",
+								"{{domain-id}}"
+							]
+						},
+						"description": "x"
+					},
+					"response": []
+				},
+				{
+					"name": "List all PolicySets available within a Domain",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/domains/{{domain-id}}/pap/policies",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"domains",
+								"{{domain-id}}",
+								"pap",
+								"policies"
+							]
+						},
+						"description": "x"
+					},
+					"response": []
+				},
+				{
+					"name": "List the available revisions of a PolicySet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"domains",
+								"{{domain-id}}",
+								"pap",
+								"policies",
+								"{{policy-id}}"
+							]
+						},
+						"description": "x"
+					},
+					"response": []
+				},
+				{
+					"name": "Read a single version of a PolicySet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}/2",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"domains",
+								"{{domain-id}}",
+								"pap",
+								"policies",
+								"{{policy-id}}",
+								"2"
+							]
+						},
+						"description": "x"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a4c41e34-093d-4739-b5e1-13736c5a803c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "62d13514-54db-4270-a2c2-beed012e7404",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Requesting Policy Decisions",
+			"item": [
+				{
+					"name": "Permit Access to a Resource",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Request xmlns=\"urn:oasis:names:tc:xacml:3.0:core:schema:wd-17\" CombinedDecision=\"false\" ReturnPolicyIdList=\"false\">\n   <Attributes Category=\"urn:oasis:names:tc:xacml:1.0:subject-category:access-subject\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:2.0:subject:role\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">managers-role-0000-0000-000000000000</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:resource\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:resource:resource-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">tutorial-dckr-site-0000-xpresswebapp</AttributeValue>\n      </Attribute>\n      <Attribute AttributeId=\"urn:thales:xacml:2.0:resource:sub-resource-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">/app/price-change</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:action\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:action:action-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">GET</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:environment\" />\n</Request>"
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/domains/{{domain-id}}/pdp",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"domains",
+								"{{domain-id}}",
+								"pdp"
+							]
+						},
+						"description": "x"
+					},
+					"response": []
+				},
+				{
+					"name": "Deny Access to a Resource",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Request xmlns=\"urn:oasis:names:tc:xacml:3.0:core:schema:wd-17\" CombinedDecision=\"false\" ReturnPolicyIdList=\"false\">\n   <Attributes Category=\"urn:oasis:names:tc:xacml:1.0:subject-category:access-subject\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:2.0:subject:role\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">security-role-0000-0000-000000000000</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:resource\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:resource:resource-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">tutorial-dckr-site-0000-xpresswebapp</AttributeValue>\n      </Attribute>\n      <Attribute AttributeId=\"urn:thales:xacml:2.0:resource:sub-resource-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">/app/price-change</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:action\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:action:action-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">GET</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:environment\" />\n</Request>"
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/domains/{{domain-id}}/pdp",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"domains",
+								"{{domain-id}}",
+								"pdp"
+							]
+						},
+						"description": "x"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PDP - Advanced Authorization",
+			"item": [
+				{
+					"name": "Keyrock - User Obtains an Access Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic {{Authorization}}",
+								"description": "base64 concatenation of Client Id and Client Secret"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "username=alice-the-admin@test.com&password=test&grant_type=password"
+						},
+						"url": {
+							"raw": "http://{{keyrock}}/oauth2/token",
+							"protocol": "http",
+							"host": [
+								"{{keyrock}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						},
+						"description": "To log in to an application using the user-credentials flow send a POST request to the `oauth2/token` endpoint with the `grant_type=password`\n\nThe response returns an `access_code` to identify the user.\n\nAn `access_code` can also be done by entering the Tutorial Application on http:/localhost and logging in using any of the OAuth2 grants\non the page. A successful log-in will return an access token."
+					},
+					"response": []
+				},
+				{
+					"name": "Keyrock - Obtain Roles and Domain",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{keyrock}}/user?access_token={{access-token-bob}}&app_id={{app-id}}&authzforce=true",
+							"protocol": "http",
+							"host": [
+								"{{keyrock}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{access-token-bob}}"
+								},
+								{
+									"key": "app_id",
+									"value": "{{app-id}}"
+								},
+								{
+									"key": "authzforce",
+									"value": "true"
+								}
+							]
+						},
+						"description": "If a user has logged in, the `access_token` can be used in combiniation with the `/user` endpoint\nto obtain access permissions to a resouce. This example retrieves Alice's permissions to a given\nresource."
+					},
+					"response": []
+				},
+				{
+					"name": "Authzforce - Apply a Policy to a Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Request xmlns=\"urn:oasis:names:tc:xacml:3.0:core:schema:wd-17\" CombinedDecision=\"false\" ReturnPolicyIdList=\"false\">\n   <Attributes Category=\"urn:oasis:names:tc:xacml:1.0:subject-category:access-subject\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:2.0:subject:role\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">managers-role-0000-0000-000000000000</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:resource\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:resource:resource-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">tutorial-dckr-site-0000-xpresswebapp</AttributeValue>\n      </Attribute>\n      <Attribute AttributeId=\"urn:thales:xacml:2.0:resource:sub-resource-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">/v2/entities</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:action\">\n      <Attribute AttributeId=\"urn:oasis:names:tc:xacml:1.0:action:action-id\" IncludeInResult=\"false\">\n         <AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">POST</AttributeValue>\n      </Attribute>\n   </Attributes>\n   <Attributes Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:environment\" />\n</Request>"
+						},
+						"url": {
+							"raw": "http://{{authzforce}}/authzforce-ce/domains/{{domain-id}}/pdp",
+							"protocol": "http",
+							"host": [
+								"{{authzforce}}"
+							],
+							"path": [
+								"authzforce-ce",
+								"domains",
+								"{{domain-id}}",
+								"pdp"
+							]
+						},
+						"description": "x"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "bf821021-7bc2-471e-9ab7-a55ecb9e663f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1269e342-1093-4844-83cb-f8fed192c512",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2fab0492-7a5e-4f73-ab54-1c38e612365c",
+			"key": "authzforce",
+			"value": "localhost:8080",
+			"type": "string"
+		},
+		{
+			"id": "2112305e-65ca-478c-8604-8218502b2501",
+			"key": "keyrock",
+			"value": "localhost:3005",
+			"type": "string"
+		},
+		{
+			"id": "918fe204-afe9-4511-b67c-ef7b7aaa7d88",
+			"key": "domain-id",
+			"value": "gQqnLOnIEeiBFQJCrBIBDA",
+			"type": "string"
+		},
+		{
+			"id": "89059832-c524-4e58-9f90-aa0b7a7ee8cf",
+			"key": "policy-id",
+			"value": "f8194af5-8a07-486a-9581-c1f05d05483c",
+			"type": "string"
+		},
+		{
+			"id": "3512d4c9-9462-4bd6-bb0c-ef23248c5549",
+			"key": "Authorization",
+			"value": "dHV0b3JpYWwtZGNrci1zaXRlLTAwMDAteHByZXNzd2ViYXBwOnR1dG9yaWFsLWRja3Itc2l0ZS0wMDAwLWNsaWVudHNlY3JldA==",
+			"type": "string"
+		},
+		{
+			"id": "a74b6ce4-3937-4a71-940a-4a318c4cb9ae",
+			"key": "access-token-bob",
+			"value": "1b88827586409b3b4dc67378e6b945c99b94c6cf",
+			"type": "string"
+		},
+		{
+			"id": "e7e25942-3a45-4f74-b489-048eb3617809",
+			"key": "app-id",
+			"value": "tutorial-dckr-site-0000-xpresswebapp",
+			"type": "string"
+		}
+	]
+}
