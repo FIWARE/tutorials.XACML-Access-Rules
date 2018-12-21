@@ -32,7 +32,7 @@ application and demonstrates examples of **Authzforce** XACML Server-PDP interac
 - [Using an XACML Server](#using-an-xacml-server)
   * [Reading XACML Rulesets](#reading-xacml-rulesets)
     + [Authzforce - Obtain Version Information](#authzforce---obtain-version-information)
-    + [:two: List all domains](#two-list-all-domains)
+    + [List all domains](#two-list-all-domains)
     + [Read a single domain](#read-a-single-domain)
     + [List all PolicySets available within a Domain](#list-all-policysets-available-within-a-domain)
     + [List the available revisions of a PolicySet](#list-the-available-revisions-of-a-policyset)
@@ -624,14 +624,18 @@ within **Authzforce**.
 
 ## Requesting Policy Decisions
 
-For the purpose of this tutorial, **Authzforce** has been supplied with the same basic rules as used in the Securing Access tutorial:
+For the purpose of this tutorial, **Authzforce** has been just been supplied with a
+simple set of basic role-based rules in a similar fashion to the level 2 authorization example found
+in the previous Securing Access tutorial:
 
 
-*  The unlock door command can only be sent by Security staff.
+* The unlock door command can only be sent by **Security** staff.
+* Access to the price-change and order-stock areas are only available to **Managers**
+* People with either the **Manager** or **Security** role can ring the bell
+* Both **Manager** or **Security** can access and interact with the store data
 
-sending the ring bell command
-access to the price-change area
-access to the order-stock area
+The only difference is that access to all store entities is now restricted to users with an assigned role
+rather than being based on level 1 authentication access.
 
 
 To request a decision from Authzforce, a structured request containing all relevant information must be sent to the  `domains/{domain-id}/pdp` endpoint. In this case, the Body of the request includes information such as the roles that 
@@ -641,7 +645,7 @@ more complex.
 
 ### Permit Access to a Resource
 
-To request a decision from Authzforce, make a POST requets to the `domains/{domain-id}/pdp` endpoint. In this cae
+To request a decision from Authzforce, make a POST requets to the `domains/{domain-id}/pdp` endpoint. In this case
 the user has the `managers-role-0000-0000-000000000000` and is requesting access the the `/app/price-change` resource.
 
 #### :seven: Request
@@ -695,7 +699,7 @@ The response for a successful request includes a `<Decision>` element to `Permit
 
 ### Deny Access to a Resource
 
-To request a decision from Authzforce, make a POST requets to the `domains/{domain-id}/pdp` endpoint. In this cae
+To request a decision from Authzforce, make a POST requets to the `domains/{domain-id}/pdp` endpoint. In this case
 the user has the `security-role-0000-0000-000000000000` and is requesting access the the `/app/price-change` resource.
 
 #### :eight: Request
@@ -745,7 +749,7 @@ The response  for an unsuccessful request includes a `<Decision>` element which 
         <ns3:Decision>Deny</ns3:Decision>
     </ns3:Result>
 </ns3:Response>
-
+```
 
 
 # PDP - Advanced Authorization
