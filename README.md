@@ -11,7 +11,7 @@ This tutorial introduces an additional security generic enabler - **Authzforce**
 control policy - this creates a flexible ruleset which can be uploaded and reinterpreted on the fly so complex business rules can be created and changed according to current circumstances.
 
 The tutorial discusses code showing how to integrate **Authzforce** within a web
-application and demonstrates examples of **Authzforce** XACML Server-PDP interactions. [cUrl](https://ec.haxx.se/) commands are used to show the interactions between generic enablers, some **Keyrock** GUI functions are also required.
+application and demonstrates examples of **Authzforce** XACML Server-PDP interactions. [cUrl](https://ec.haxx.se/) commands are used to show the interactions between generic enablers.
 [Postman documentation](https://fiware.github.io/tutorials.XACML-Access-Rules/) is available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/66d8ba3abaf7319941b1)
@@ -70,7 +70,7 @@ basic authorization access to resources based on a role (level 2). These policie
 To satisfy a complex access control scenario, an additional arbitration microservice is required, which is able to come to a judgement on each Permit/Deny policy decision by reading and interpreting the full set of access control rules, and based their judgement on the evidence provided by the requesting service.
 
 FIWARE [Authzforce](https://authzforce-ce-fiware.readthedocs.io/) is a service which is able to provide such an interpretive Policy Decision Point (PDP). It is an advanced access control Generic Enabler which is able to interpret rules
-supplied using the XACML standard. Rulesets can be amended and uploaded at any time providing a flexible method to maintain security policies which can change according to business need. Furthermore the language used to describe the access policy is designed to be highly extensible and cover any access control scenario.
+supplied using the [XACML standard](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml). Rulesets can be amended and uploaded at any time providing a flexible method to maintain security policies which can change according to business need. Furthermore the language used to describe the access policy is designed to be highly extensible and cover any access control scenario.
 
 ## What is XACML
 
@@ -123,19 +123,19 @@ A `<Rule>` element consists of a `<Target>` and a `<Condition>`. This is an exam
 </Rule>
 ```
 
-This is a very verbose method for creating a simple Role-Verb-Resource access rule, but unlike simple Verb-Resource rules, with XACML, other more complex comparisons can be made, for example checking that time is
+This is a very verbose method for creating a simple Verb-Resource access rule, but unlike simple Verb-Resource rules, with XACML, other more complex comparisons can be made, for example checking that time is
 before a certain hour of day, or checking that a URL starts with or contains a certain string. Conditions can be specified down
 to the attribute level or combined to make complex calculations, for example  - an XACML `<Rule>` could be created
 to apply the following policy:
 
-> *a store manager is able to amend Product prices only the first of the month, and can only alter prices of products he or his immediate superior has created in the first place*
+> *A store manager is able to amend Product prices only the first of the month, and can only alter prices of products she or her immediate superior has created in the first place*
 
 Such a `<Rule>` would require that the `<Condition>` includes separate clauses/clarifications for the following:
 
 * What is the User's role (e.g. `manager`)
 * What action is being invoked  (e.g PATCH or PUT)
 * Which resource is being protected URL string (e.g. `/v2/entities`)
-* What other information must be present in the body of the request (e.g. Entitiy `type` must equal `Product`
+* What other information must be present in the body of the request (e.g. Entity `type` must equal `Product`
 * When is the resource being requested (e.g. the current date)
 * What other additional information must be retrieved from elsewhere prior to making the request
     * Who created the entity? Is it me or my manager?
