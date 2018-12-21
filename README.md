@@ -328,9 +328,9 @@ environment variables as shown:
 | Key                    | Value        | Description                                                                  |
 | ---------------------- | ------------ | ---------------------------------------------------------------------------- |
 | IDM_PDP_LEVEL          | `advanced`   | Flag indicating that **Keyrock** should delegate PDP decisions to Authzforce |
-| PEP_PROXY_AZF_PROTOCOL | `http`       | Transport protocol used by the XACML Server microservice                     |
-| PEP_PROXY_AZF_HOST     | `authzforce` | This is URL where the **Authzforce** is found users                          |
-| PEP_PROXY_AZF_PORT     | `8080`       | Port that **Authzforce** is listening on                                     |
+| IDM_AUTHZFORCE_ENABLED | `true`       | Flag indicating that **Authzforce** is available                             |
+| IDM_AUTHZFORCE_HOST    | `authzforce` | This is URL where the **Authzforce** is found                                |
+| IDM_AUTHZFORCE_PORT    | `8080`       | Port that **Authzforce** is listening on                                     |
 
 The other `keyrock` container configuration values described in the YAML file
 have been described in previous tutorials
@@ -382,8 +382,8 @@ driven by environment variables as shown:
 | Key                    | Value        | Description                                               |
 | ---------------------- | ------------ | --------------------------------------------------------- |
 | PEP_PROXY_PDP          | `authzforce` | Flag ensuring that the PEP Proxy uses Authzforce as a PDP |
-| PEP_PROXY_AZF_PROTOCOL | `http`       | Flag to enable use of the XACML PDP                       |
-| PEP_PROXY_AZF_HOST     | `authzforce` | This is URL where the **Authzforce** is found users       |
+| PEP_PROXY_AZF_PROTOCOL | `http`       | Protocol that **Authzforce** uses                         |
+| PEP_PROXY_AZF_HOST     | `authzforce` | This is URL where the **Authzforce** is found             |
 | PEP_PROXY_AZF_PORT     | `8080`       | Port that **Authzforce** is listening on                  |
 
 The other `orion-proxy` container configuration values described in the YAML
@@ -453,7 +453,7 @@ environment variables as shown:
 | Key                | Value               | Description                                         |
 | ------------------ | ------------------- | --------------------------------------------------- |
 | AUTHZFORCE_ENABLED | `true`              | Flag to enable use of the XACML PDP                 |
-| AUTHZFORCE_URL     | `http://authzforce` | This is URL where the **Authzforce** is found users |
+| AUTHZFORCE_URL     | `http://authzforce` | This is URL where the **Authzforce** is found       |
 | AUTHZFORCE_PORT    | `8080`              | Port that **Authzforce** is listening on            |
 
 The other `tutorial` container configuration values described in the YAML file
