@@ -28,10 +28,10 @@ application and demonstrates examples of **Authzforce** XACML Server-PDP interac
   * [Authzforce Configuration](#authzforce-configuration)
   * [Tutorial Security Configuration](#tutorial-security-configuration)
 - [Start Up](#start-up)
+    + [Authzforce - Obtain Version Information](#authzforce---obtain-version-information)
     + [Dramatis Personae](#dramatis-personae)
 - [Using an XACML Server](#using-an-xacml-server)
   * [Reading XACML Rulesets](#reading-xacml-rulesets)
-    + [Authzforce - Obtain Version Information](#authzforce---obtain-version-information)
     + [List all domains](#two-list-all-domains)
     + [Read a single domain](#read-a-single-domain)
     + [List all PolicySets available within a Domain](#list-all-policysets-available-within-a-domain)
@@ -414,15 +414,6 @@ reason to be granted access
 | rob     | rob@example.com     | `test`   |
 
 
-# Using an XACML Server
-
-## Reading XACML Rulesets
-
-`<PolicySet>`
-
-
-
-
 ### Authzforce - Obtain Version Information
 
 Once **Authzforce** is running, you can check the status by making an HTTP request to
@@ -454,6 +445,28 @@ The response returns information about the version of Authzforce.
    uptime="P0Y0M0DT0H8M47.642S" 
    doc="https://authzforce.github.io/fiware/authorization-pdp-api-spec/5.2/"/>
 ```
+
+
+# Using an XACML Server
+
+**Authzforce** is a Policy Decision Point (PDP) Generic Enabler, which makes authorization decisions
+based on `<PolicySet>` information written in 
+[XACML](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml). This example starts with 
+a running XACML server containing an existing set of rules. An XACML server should offer an API
+to administrate policies and invoke access control policy decisions. This tutorial is mainly concerned
+with the decision making side  -  the creation and administration of access control policies will be
+dealt with in a subsequent tutorial.
+
+## Reading XACML Rulesets
+
+A single XACML server can be used to administrate access control policies for multiple applications. 
+**Authzforce** is implicitly multi-tenant, in that it allows separate organizations to work on their
+policies in isolation from one another. This is done by separating the security policies for each
+application into a separate **domain** where they can access their own `<PolicySets>`.  A domain
+holds meta data about the secured application along with versions of the policies themselves (effectively
+a series of files which can be accessed by a file server). The domain management API can be 
+ used to query **Authzforce** about the domains served and policies held. 
+
 
 ### List all domains
 
@@ -681,7 +694,7 @@ curl -X POST \
 #### Response
 
 The `managers-role-0000-0000-000000000000` permits access to the `/app/price-change` endpoint.
-The response for a successful request includes a `<Decision>` element to `Permit` to the resource.
+The response for a successful request includes a `<Decision>` element to `Permit` access to the resource.
 
 
 ```xml
@@ -735,7 +748,7 @@ curl -X POST \
 #### Response
 
 The `security-role-0000-0000-000000000000` does not permit access to the `/app/price-change` endpoint.
-The response  for an unsuccessful request includes a `<Decision>` element which will `Deny` to the resource.
+The response  for an unsuccessful request includes a `<Decision>` element which will `Deny` access to the resource.
 
 
 ```xml
@@ -817,7 +830,7 @@ curl -X GET \
 
 Where :
 
-* `{{access-token}}` is the current access token of a logged in user e.g. 08fef363c429cb34cfff3f56dfe751a8d1890690
+* `{{access-token}}` is the current access token of a logged in user (e.g. `08fef363c429cb34cfff3f56dfe751a8d1890690`)
 * `{{app-id}}` holds the application to request `tutorial-dckr-site-0000-xpresswebapp`
 and `authzforce=true` indicates that we want to obtain an **Authzforce** Domain from **Keyrock**
 
