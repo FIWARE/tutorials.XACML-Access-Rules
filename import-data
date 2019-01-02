@@ -55,7 +55,7 @@ curl -X POST \
   http://orion:1026/v2/registrations \
   -H 'Content-Type: application/json' \
   -d '{
-   "description": "located in CP1",
+   "description": "Weather Conditions",
    "dataProvided": {
      "entities": [
        {
