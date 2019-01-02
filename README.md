@@ -21,7 +21,7 @@ interactions between generic enablers.
 [Postman documentation](https://fiware.github.io/tutorials.XACML-Access-Rules/)
 is available.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/66d8ba3abaf7319941b1)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/724e8e1ab1af11063d15)
 
 # Contents
 
@@ -964,6 +964,10 @@ the Manager)
 ```
 
 ### Obtain Roles and Domain
+
+If a user has logged in, the `access_token` can be used in combiniation with the `/user` endpoint
+to obtain access permissions to a resouce. This example retrieves Bobs's permissions to a given
+resource.
 
 #### :one::zero: Request
 
