@@ -14,7 +14,7 @@ services:
       - mongo-db:/data
 
   orion:
-    image: fiware/orion:2.0.0
+    image: fiware/orion:2.1.0
     hostname: orion
     container_name: fiware-orion
     depends_on:
@@ -127,7 +127,7 @@ services:
       - my_secret_data
 
   authzforce:
-    image: fiware/authzforce-ce-server:latest-unstable
+    image: fiware/authzforce-ce-server:release-8.0.1
     hostname: authzforce
     container_name: fiware-authzforce
     networks:
