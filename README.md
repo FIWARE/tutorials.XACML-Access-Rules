@@ -614,7 +614,7 @@ corresponds to the directory structure uploaded to **Authzforce** on start-up.
 To read information about a domain, and to explore further, make a request to
 the `authzforce-ce/domains/{{domain-id}}` endpoint. The following request
 obtains information about the `gQqnLOnIEeiBFQJCrBIBDA` domain, which has been
-generated using using a random key by an external Policy Adminstration Point in
+generated using a random key by an external Policy Adminstration Point in
 this case **Keyrock** has been used as the PAP, and pre-generated the rule sets.
 
 #### :three: Request
@@ -784,7 +784,7 @@ information passed in the Body can be expanded as the rules become more complex.
 
 To request a decision from Authzforce, make a POST requets to the
 `domains/{domain-id}/pdp` endpoint. In this case the user has the
-`managers-role-0000-0000-000000000000` and is requesting access the the
+`managers-role-0000-0000-000000000000` and is requesting access the
 `/app/price-change` resource.
 
 #### :seven: Request
@@ -840,7 +840,7 @@ The `managers-role-0000-0000-000000000000` permits access to the
 
 To request a decision from Authzforce, make a POST requets to the
 `domains/{domain-id}/pdp` endpoint. In this case the user has the
-`security-role-0000-0000-000000000000` and is requesting access the the
+`security-role-0000-0000-000000000000` and is requesting access the
 `/app/price-change` resource.
 
 #### :eight: Request
@@ -1165,7 +1165,7 @@ Applying advanced authorization within a PEP proxy requires very similar code to
 the programmatic example described above. The **Wilma** generic enabler extracts
 a token from the header supplied by the request and makes a request to
 **Keyrock** to obtain further information about the user. A PDP request is then
-made to **Authzforce** to decide whether to procede.
+made to **Authzforce** to decide whether to proceed.
 
 Obviously any scalable solution should also cache information about the PDP
 requests made and the responses to avoid making unnecessary requests.
