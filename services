@@ -38,6 +38,17 @@ startContainers () {
 stoppingContainers () {
 	echo "Stopping containers"
 	docker-compose --log-level ERROR -f docker-compose.yml  -p fiware down -v --remove-orphans
+	echo ""
+	echo "Removing Authzforce Domains"
+	for dir in ./authzforce/domains/*; do
+		[ "$dir" = "./authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA" ] && continue
+		rm -rf "$dir"
+	done
+	for file in ./authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/*; do
+		[ "$file" = "./authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/1.xml" ] && continue
+		[ "$file" = "./authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/2.xml" ] && continue
+		rm "$file"
+	done
 }
 
 if (( $# != 1 )); then
