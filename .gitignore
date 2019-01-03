@@ -36,3 +36,16 @@ jspm_packages/
 *.tgz
 .env
 .next
+
+# Authzforce Domains
+!authzforce/domains
+authzforce/domains/*
+!authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA
+!authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/pdp.xml
+!authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/properties.xml
+authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/*
+!authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/cm9vdA/0.1.0.xml
+authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/*
+!authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/1.xml
+!authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/2.xml
+authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/*
