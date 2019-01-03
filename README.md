@@ -1237,6 +1237,12 @@ Charlie has the **security** role
     -   Ring a bell - access is **permitted** - This is permitted to security
         users
 
+# Next Steps
+
+Want to learn how to add more complexity to your application by adding advanced
+features? You can find out by reading the other
+[tutorials in this series](https://fiware-tutorials.rtfd.io)
+
 ---
 
 ## License
