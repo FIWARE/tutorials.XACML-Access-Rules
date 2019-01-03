@@ -103,7 +103,7 @@ CREATE TABLE `authzforce` (
 LOCK TABLES `authzforce` WRITE;
 /*!40000 ALTER TABLE `authzforce` DISABLE KEYS */;
 INSERT INTO `authzforce` VALUES 
-('gQqnLOnIEeiBFQJCrBIBDA','f8194af5-8a07-486a-9581-c1f05d05483c',1,'tutorial-dckr-site-0000-xpresswebapp');
+('gQqnLOnIEeiBFQJCrBIBDA','f8194af5-8a07-486a-9581-c1f05d05483c',2,'tutorial-dckr-site-0000-xpresswebapp');
 /*!40000 ALTER TABLE `authzforce` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +457,9 @@ INSERT INTO `permission` VALUES
 ('increase-stck-0000-0000-000000000000','Order Stock','Increase Stock Count',0,'GET','/app/order-stock',NULL,'tutorial-dckr-site-0000-xpresswebapp'),
 ('entrance-open-0000-0000-000000000000','Unlock','Unlock main entrance',0,'POST','/door/unlock',NULL,'tutorial-dckr-site-0000-xpresswebapp'),
 ('alrmbell-ring-0000-0000-000000000000','Ring Alarm Bell',NULL,0,'POST','/bell/ring',NULL,'tutorial-dckr-site-0000-xpresswebapp'),
-('pricechg-stck-0000-0000-000000000000','Access Price Changes',NULL,0,'GET','/app/price-change',NULL,'tutorial-dckr-site-0000-xpresswebapp');
+('pricechg-stck-0000-0000-000000000000','Access Price Changes',NULL,0,'GET','/app/price-change',NULL,'tutorial-dckr-site-0000-xpresswebapp'),
+('managers-prxy-cbkr-0000-000000000000','Managers Context Broker Access','Proxy access for Managers',0,NULL,NULL,'<Rule RuleId="orion-access-mngr-0000-000000000000" Effect="Permit">\n<Description>Context Broker Access</Description>\n<Target>\n<AnyOf>\n<AllOf>\n<Match MatchId="urn:oasis:names:tc:xacml:3.0:function:string-starts-with">\n<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/v2/entities</AttributeValue>\n<AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />\n</Match>\n</AllOf>\n</AnyOf>\n</Target>\n<Condition>\n<Apply FunctionId="urn:oasis:names:tc:xacml:3.0:function:any-of">\n<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />\n<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">managers-role-0000-0000-000000000000</AttributeValue>\n<AttributeDesignator Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" AttributeId="urn:oasis:names:tc:xacml:2.0:subject:role" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false" />\n</Apply>\n</Condition>\n</Rule>','tutorial-dckr-site-0000-xpresswebapp'),
+('security-prxy-cbkr-0000-000000000000','Security Context Broker Access','Proxy access for Security',0,NULL,NULL,'<Rule RuleId="orion-access-secr-0000-000000000000" Effect="Permit">\n<Description>Context Broker Access</Description>\n<Target>\n<AnyOf>\n<AllOf>\n<Match MatchId="urn:oasis:names:tc:xacml:3.0:function:string-starts-with">\n<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/v2/entities</AttributeValue>\n<AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />\n</Match>\n</AllOf>\n</AnyOf>\n</Target>\n<Condition>\n<Apply FunctionId="urn:oasis:names:tc:xacml:3.0:function:any-of">\n<Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal" />\n<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">security-role-0000-0000-000000000000</AttributeValue>\n<AttributeDesignator Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" AttributeId="urn:oasis:names:tc:xacml:2.0:subject:role" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false" />\n</Apply>\n</Condition>\n</Rule>','tutorial-dckr-site-0000-xpresswebapp');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -571,7 +573,9 @@ INSERT INTO `role_permission` VALUES
 (9,'security-role-0000-0000-000000000000','entrance-open-0000-0000-000000000000'),
 (10,'managers-role-0000-0000-000000000000','alrmbell-ring-0000-0000-000000000000'),
 (11,'managers-role-0000-0000-000000000000','increase-stck-0000-0000-000000000000'),
-(12,'managers-role-0000-0000-000000000000','pricechg-stck-0000-0000-000000000000');
+(12,'managers-role-0000-0000-000000000000','pricechg-stck-0000-0000-000000000000'),
+(13,'managers-role-0000-0000-000000000000','managers-prxy-cbkr-0000-000000000000'),
+(14,'security-role-0000-0000-000000000000','security-prxy-cbkr-0000-000000000000');
 
 
 
