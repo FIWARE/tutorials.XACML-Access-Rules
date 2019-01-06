@@ -23,6 +23,8 @@ is available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/724e8e1ab1af11063d15)
 
+-   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
+
 # Contents
 
 -   [Ruleset Based Permissions](#ruleset-based-permissions)
