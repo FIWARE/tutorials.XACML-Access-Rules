@@ -23,6 +23,8 @@ is available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/724e8e1ab1af11063d15)
 
+-   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
+
 # Contents
 
 -   [Ruleset Based Permissions](#ruleset-based-permissions)
@@ -36,8 +38,8 @@ is available.
     -   [Authzforce Configuration](#authzforce-configuration)
     -   [Tutorial Security Configuration](#tutorial-security-configuration)
 -   [Start Up](#start-up)
-    -   [Authzforce - Obtain Version Information](#authzforce---obtain-version-information)
     -   [Dramatis Personae](#dramatis-personae)
+    -   [Authzforce - Obtain Version Information](#authzforce---obtain-version-information)
 -   [Using an XACML Server](#using-an-xacml-server)
     -   [Reading XACML Rulesets](#reading-xacml-rulesets)
         -   [List all domains](#two-list-all-domains)
@@ -112,7 +114,7 @@ elements each of which contain one or more `<Rule>` elements.
 Each `<Rule>` within a `<Policy>` is evaluated as to whether it should grant
 access to a resource - the overall `<Policy>` result is defined by the overall
 result of all `<Rule>` elements processed in turn. Separate `<Policy>` results
-are then evaluated against each other using combining alogorthms define which
+are then evaluated against each other using combining algorithms define which
 `<Policy>` wins in case of conflict.
 
 A `<Rule>` element consists of a `<Target>` and a `<Condition>`. This is an
@@ -168,7 +170,7 @@ Such a `<Rule>` would require that the `<Condition>` includes separate
 clauses/clarifications for the following:
 
 -   What is the User's role? (e.g. `manager`)
--   What action is being invoked? (e.g PATCH or PUT)
+-   What action is being invoked? (e.g. PATCH or PUT)
 -   Which resource is being protected URL string? (e.g. `/v2/entities`)
 -   What other information must be present in the body of the request? (e.g.
     Entity `type` must equal `Product`)
@@ -223,7 +225,7 @@ five FIWARE components - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),the
 [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/),
 the [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Identity Manager,
-the [Wilma]() PEP Proxy and the
+the [Wilma](https://fiware-pep-proxy.readthedocs.io/en/latest/) PEP Proxy and the
 [Authzforce](https://authzforce-ce-fiware.readthedocs.io) XACML Server. All
 access control decisions will be delegated to **Authzforce** which will read the
 ruleset from a previously uploaded policy domain.
@@ -257,7 +259,7 @@ Therefore the overall architecture will consist of the following elements:
     such as **Orion** and the tutorial application.
 -   FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) is a PEP Proxy securing
     access to the **Orion** microservices, it delegates the passing of
-    authorisation decisions to **Authzforce** PDP
+    authorization decisions to **Authzforce** PDP
 -   The underlying [MongoDB](https://www.mongodb.com/) database :
     -   Used by the **Orion Context Broker** to hold context data information
         such as data entities, subscriptions and registrations
@@ -270,7 +272,7 @@ Therefore the overall architecture will consist of the following elements:
     -   Shows which products can be bought at each store
     -   Allows users to "buy" products and reduce the stock count.
     -   Allows authorized users into restricted areas, it also delegates
-        authoriation decisions to the **Authzforce** PDP
+        authorization decisions to the **Authzforce** PDP
 -   A webserver acting as set of
     [dummy IoT devices](https://github.com/Fiware/tutorials.IoT-Sensors) using
     the
@@ -447,7 +449,7 @@ The `tutorial` container is listening on two ports:
 -   Port `3001` is exposed purely for tutorial access - so that cUrl or Postman
     can make UltraLight commands without being part of the same network.
 
-The `tutorial` container is now secured by **Authforce**, and is driven by
+The `tutorial` container is now secured by **Authzforce**, and is driven by
 environment variables as shown:
 
 | Key                | Value               | Description                                         |
@@ -537,7 +539,7 @@ reason to be granted access
 ### Authzforce - Obtain Version Information
 
 Once **Authzforce** is running, you can check the status by making an HTTP
-request to the exposed administration port (usually `8080`. If the response is
+request to the exposed administration port (usually `8080`). If the response is
 blank, this is usually because **Authzforce** is not running or is listening on
 another port.
 
@@ -623,7 +625,7 @@ corresponds to the directory structure uploaded to **Authzforce** on start-up.
 To read information about a domain, and to explore further, make a request to
 the `authzforce-ce/domains/{{domain-id}}` endpoint. The following request
 obtains information about the `gQqnLOnIEeiBFQJCrBIBDA` domain, which has been
-generated using a random key by an external Policy Adminstration Point in
+generated using a random key by an external Policy Administration Point in
 this case **Keyrock** has been used as the PAP, and pre-generated the rule sets.
 
 #### :three: Request
@@ -672,7 +674,7 @@ curl -X GET \
 #### Response
 
 The response returns a list of available revisions of the given policy which are
-available within. the **Authzforce** container. This corresponds the named XML
+available within the **Authzforce** container. This corresponds the named XML
 files `1.xml`, `2.xml` etc.
 
 ```xml
@@ -722,7 +724,7 @@ files `1.xml`, `2.xml` etc.
 
 ### Read a single version of a PolicySet
 
-To obtain a single revison of a `<PolicySet>`, make a request to the
+To obtain a single revision of a `<PolicySet>`, make a request to the
 `authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}/{{revision-number}}`
 endpoint. The following request obtains the second revision of the given policy
 found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
@@ -791,7 +793,7 @@ information passed in the Body can be expanded as the rules become more complex.
 
 ### Permit Access to a Resource
 
-To request a decision from Authzforce, make a POST requets to the
+To request a decision from Authzforce, make a POST request to the
 `domains/{domain-id}/pdp` endpoint. In this case the user has the
 `managers-role-0000-0000-000000000000` and is requesting access the
 `/app/price-change` resource.
@@ -847,7 +849,7 @@ The `managers-role-0000-0000-000000000000` permits access to the
 
 ### Deny Access to a Resource
 
-To request a decision from Authzforce, make a POST requets to the
+To request a decision from Authzforce, make a POST request to the
 `domains/{domain-id}/pdp` endpoint. In this case the user has the
 `security-role-0000-0000-000000000000` and is requesting access the
 `/app/price-change` resource.
@@ -929,7 +931,7 @@ For example users in role `XXX` can access URL **starting with** `YYY` provided
 that the HTTP verb **is either** `GET`, `PUT` or `POST`. Such users may also
 `DELETE` **provided that** they were the creator in the first place.
 
-Within the tutorial programatic example we are using our own trusted instance of
+Within the tutorial programmatic example we are using our own trusted instance of
 **Keyrock** - once a user has signed in and obtained an `access_token`, the
 `access_token` can be stored in session and used to retrieve user details on
 demand. All access to the Orion context broker is hidden behind a PEP Proxy.
@@ -974,8 +976,8 @@ the Manager)
 
 ### Obtain Roles and Domain
 
-If a user has logged in, the `access_token` can be used in combiniation with the `/user` endpoint
-to obtain access permissions to a resouce. This example retrieves Bobs's permissions to a given
+If a user has logged in, the `access_token` can be used in combination with the `/user` endpoint
+to obtain access permissions to a resource. This example retrieves Bob's permissions to a given
 resource.
 
 #### :one::zero: Request
@@ -1084,7 +1086,7 @@ The response includes a `<Decision>` element which will either `Permit` or
 
 ### Advanced Authorization - Sample Code
 
-Programmatically, any Policy Execution Point consists of two parts, an oAuth
+Programmatically, any Policy Execution Point consists of two parts, an OAuth
 request to Keyrock retrieves information about the user (such as the assigned
 roles) as well as the policy domain to be queried.
 
