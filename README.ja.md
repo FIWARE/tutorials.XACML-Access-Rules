@@ -16,7 +16,7 @@
 チュートリアルでは、**Authzforce** を Web アプリケーションに統合する方法を示す
 コードについて説明し、**Authzforce** XACML Server-PDP とのやり取りの例を示します
 。[cUrl](https://ec.haxx.se/) コマンドは、Generic Enablers 間の相互作用を示す
-ために使用されます。 
+ために使用されます。
 [Postman documentation](https://fiware.github.io/tutorials.XACML-Access-Rules/)
 が利用できます。
 
@@ -240,7 +240,7 @@ Context Broker へのアクセスを保護します。
 以前にアップロードされたポリシー・ドメインからルールセットを読み取る
 **Authzforce** に委任されます。
 
-Orion Context Brokerと IoT Agent はどちらも、オープンソースの 
+Orion Context Brokerと IoT Agent はどちらも、オープンソースの
 [MongoDB](https://www.mongodb.com/) テクノロジを使用して、保持している情報を
 永続化します。また、
 [以前のチュートリアル](https://github.com/Fiware/tutorials.IoT-Sensors/)
@@ -532,14 +532,14 @@ Bash スクリプトを実行することによって、コマンドラインか
     警備員がいます :
     -   Detective1 (警備員 1)
     -   Detective2 (警備員 2)
-    
+
 次の`example.com` のメンバはアカウントにサインアップしましたが、アクセスを許可す
 る理由はありません
 
 -   Eve - 盗聴者のイブ
 -   Mallory - 悪意のある攻撃者のマロリー
 -   Rob - 強盗のロブ
-    
+
 <details>
   <summary>
    詳細<b>(クリックして拡大)</b>
@@ -1061,7 +1061,7 @@ curl -X GET \
 -   `{{access-token}}` は、ログインしているユーザの現在のアクセス・トークンです
     (例 : `08fef363c429cb34cfff3f56dfe751a8d1890690`)
 -   `{{app-id}}` は `tutorial-dckr-site-0000-xpresswebapp` をリクエストする
-    アプリケーションを保持し、`authzforce=true` は **Keyrock** から 
+    アプリケーションを保持し、`authzforce=true` は **Keyrock** から
     **Authzforce** ドメインを取得したいことを示します
 
 #### レスポンス
@@ -1303,7 +1303,7 @@ Bob は、**management** ロールを持っています
 -   `http://localhost:3000/device/monitor` でデバイス・モニタを開きます
     -   ドアのロックを解除 - アクセスは**拒否**されます -
         これは security のみの許可です
-    -   ベルを鳴らす - アクセスは**許可**されます - 
+    -   ベルを鳴らす - アクセスは**許可**されます -
         これは management ユーザに許可されます
 
 #### Charlie セキュリティ・マネージャ
@@ -1317,7 +1317,7 @@ Charlie は、the **security** ロールを持っています
 
 -   `http://localhost:3000` で制限されたアクセス・リンクをクリック -
     アクセスは**拒否**されます - これは management のみの権限です
--   `http://localhost:3000/device/monitor` でデバイス・モニタを開きます 
+-   `http://localhost:3000/device/monitor` でデバイス・モニタを開きます
     -   ドアのロックを解除 - アクセスは**許可**されます -
         これは security のみの許可です
     -   ベルを鳴らす - アクセスが**許可**されます -
@@ -1334,4 +1334,4 @@ Charlie は、the **security** ロールを持っています
 
 ## License
 
-[MIT](LICENSE) © FIWARE Foundation e.V.
+[MIT](LICENSE) © 2018-2019 FIWARE Foundation e.V.
