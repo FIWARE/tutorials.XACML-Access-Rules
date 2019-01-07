@@ -24,6 +24,9 @@
 
 # コンテンツ
 
+<details>
+<summary>詳細 <b>(クリックして拡大)</b></summary>
+
 -   [ルールセットベースの権限](#ruleset-based-permissions)
     -   [XACML とは](#what-is-xacml)
 -   [前提条件](#prerequisites)
@@ -55,6 +58,8 @@
         -   [高度な認可 - サンプル・コード](#advanced-authorization---sample-code)
         -   [高度な認可 - PEP Proxy](#advanced-authorization---pep-proxy)
     -   [PDP - 高度な許可 - 例の実行](#pdp---advanced-authorization---running-the-example)
+
+</details>
 
 <a name="ruleset-based-permissions"></a>
 

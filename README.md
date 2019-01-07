@@ -25,7 +25,10 @@ is available.
 
 -   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
 
-# Contents
+## Contents
+
+<details>
+<summary><strong>Details</strong></summary>
 
 -   [Ruleset Based Permissions](#ruleset-based-permissions)
     -   [What is XACML](#what-is-xacml)
@@ -58,6 +61,9 @@ is available.
         -   [Advanced Authorization - Sample Code](#advanced-authorization---sample-code)
         -   [Advanced Authorization - PEP Proxy](#advanced-authorization---pep-proxy)
     -   [PDP - Advanced Authorization - Running the Example](#pdp---advanced-authorization---running-the-example)
+-   [Next Steps](#next-steps)
+
+</details>
 
 # Ruleset Based Permissions
 
