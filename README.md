@@ -3,6 +3,7 @@
 [![FIWARE Security](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/security.svg)](https://www.fiware.org/developers/catalogue/)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.XACML-Access-Rules.svg)](https://opensource.org/licenses/MIT)
 [![Support badge](https://nexus.lab.fiware.org/repository/raw/public/badges/stackoverflow/fiware.svg)](https://stackoverflow.com/questions/tagged/fiware)
+[![FIWARE Security](https://img.shields.io/badge/XACML-3.0-ff7059.svg)](https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html)
 <br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
@@ -189,6 +190,8 @@ As you can see these rules can quickly become very complex. For this initial
 introduction to XACML, the basic rule set used will be kept as simple as
 possible to avoid unnecessary confusion, suffice it to say that an access policy
 based on XACML can be expanded to fit the security needs of any complex system.
+
+Further information can be found within the [XACML standard](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml) and [additional resources](https://www.webfarmr.eu/xacml-tutorial-axiomatics/) can be found on the web.
 
 # Prerequisites
 
