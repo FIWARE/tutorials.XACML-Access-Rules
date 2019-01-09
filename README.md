@@ -83,8 +83,8 @@ is available.
 > — Quran 6.151, Sūrat al-Anʻām
 
 [Previous tutorials](https://github.com/Fiware/tutorials.Securing-Access) have
-introduced a simple access control system based on authentication (level 1) or
-basic authorization access to resources based on a role (level 2). These
+introduced a simple access control system based on _authentication_ (level 1) or
+_basic authorization_ access to resources based on a role (level 2). These
 policies are easy to create, but the rules within them are very black and white,
 rules cannot rely on one another, have exception clauses or offer access based
 on time limits or attribute values. There is also no mechanism to resolve
@@ -225,7 +225,7 @@ functionality similar to a Linux distribution on Windows.
 
 # Architecture
 
-This application adds level 3 Advanced Authorization security into the existing
+This application adds level 3 _Advanced Authorization_ security into the existing
 Stock Management and Sensors-based application created in
 [previous tutorials](https://github.com/Fiware/tutorials.Securing-Access/) and
 secures access to the context broker behind a
@@ -916,11 +916,11 @@ a `<Decision>` element which will `Deny` access to the resource.
 
 As a reminder, there are three Levels of PDP Access Control:
 
--   Level 1: Authentication Access - Allow all actions to every signed in user
+-   Level 1: _Authentication Access_ - Allow all actions to every signed in user
     and no actions to an anonymous user.
--   Level 2: Basic Authorization - Check which resources and verbs the currently
+-   Level 2: _Basic Authorization_ - Check which resources and verbs the currently
     logged in user should have access to
--   Level 3: Advanced Authorization - Fine grained control through
+-   Level 3: _Advanced Authorization_ - Fine grained control through
     [XACML](https://en.wikipedia.org/wiki/XACML)
 
 Within FIWARE, Level 3 access control can be provided by adding **Authzforce**
@@ -932,7 +932,7 @@ Proxy.
 
 ## Advanced Authorization
 
-Advanced Authorization is able to deal with complex rulesets. Permissions are no
+_Advanced Authorization_ is able to deal with complex rulesets. Permissions are no
 longer merely based on a fixed role, resource and an action, but can be extended
 as necessary.
 
@@ -1181,7 +1181,7 @@ function policyDomainRequest(domain, roles, resource, action) {
 
 ### Advanced Authorization - PEP Proxy
 
-Applying advanced authorization within a PEP proxy requires very similar code to
+Applying _advanced authorization_ within a PEP proxy requires very similar code to
 the programmatic example described above. The **Wilma** generic enabler extracts
 a token from the header supplied by the request and makes a request to
 **Keyrock** to obtain further information about the user. A PDP request is then
