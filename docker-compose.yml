@@ -200,8 +200,6 @@ services:
       - PEP_PROXY_AZF_PROTOCOL=http
       - PEP_PROXY_AZF_HOST=authzforce
       - PEP_PROXY_AZF_PORT=8080
-    healthcheck:
-      test: curl --fail -s http://localhost:1027/version || exit 1
 
 networks:
   default:
