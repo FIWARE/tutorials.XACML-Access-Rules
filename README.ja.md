@@ -21,7 +21,7 @@
 [Postman documentation](https://fiware.github.io/tutorials.XACML-Access-Rules/)
 が利用できます。
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/724e8e1ab1af11063d15)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/724e8e1ab1af11063d15)
 
 # コンテンツ
 

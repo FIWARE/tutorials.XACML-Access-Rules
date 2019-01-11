@@ -22,7 +22,7 @@ interactions between generic enablers.
 [Postman documentation](https://fiware.github.io/tutorials.XACML-Access-Rules/)
 is available.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/724e8e1ab1af11063d15)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/724e8e1ab1af11063d15)
 
 -   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
 
@@ -191,7 +191,10 @@ introduction to XACML, the basic rule set used will be kept as simple as
 possible to avoid unnecessary confusion, suffice it to say that an access policy
 based on XACML can be expanded to fit the security needs of any complex system.
 
-Further information can be found within the [XACML standard](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml) and [additional resources](https://www.webfarmr.eu/xacml-tutorial-axiomatics/) can be found on the web.
+Further information can be found within the
+[XACML standard](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml)
+and [additional resources](https://www.webfarmr.eu/xacml-tutorial-axiomatics/)
+can be found on the web.
 
 # Prerequisites
 
@@ -225,8 +228,8 @@ functionality similar to a Linux distribution on Windows.
 
 # Architecture
 
-This application adds level 3 _Advanced Authorization_ security into the existing
-Stock Management and Sensors-based application created in
+This application adds level 3 _Advanced Authorization_ security into the
+existing Stock Management and Sensors-based application created in
 [previous tutorials](https://github.com/Fiware/tutorials.Securing-Access/) and
 secures access to the context broker behind a
 [PEP Proxy](https://github.com/Fiware/tutorials.PEP-Proxy/). It will make use of
@@ -234,8 +237,8 @@ five FIWARE components - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),the
 [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/),
 the [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Identity Manager,
-the [Wilma](https://fiware-pep-proxy.readthedocs.io/en/latest/) PEP Proxy and the
-[Authzforce](https://authzforce-ce-fiware.readthedocs.io) XACML Server. All
+the [Wilma](https://fiware-pep-proxy.readthedocs.io/en/latest/) PEP Proxy and
+the [Authzforce](https://authzforce-ce-fiware.readthedocs.io) XACML Server. All
 access control decisions will be delegated to **Authzforce** which will read the
 ruleset from a previously uploaded policy domain.
 
@@ -264,8 +267,8 @@ Therefore the overall architecture will consist of the following elements:
     -   A site graphical frontend for Identity Management Administration
     -   An equivalent REST API for Identity Management via HTTP requests
 -   FIWARE [Authzforce](https://authzforce-ce-fiware.readthedocs.io/) is a XACML
-    Server providing an interpretive Policy Decision Point (PDP) protecting access to resources
-    such as **Orion** and the tutorial application.
+    Server providing an interpretive Policy Decision Point (PDP) protecting
+    access to resources such as **Orion** and the tutorial application.
 -   FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) is a PEP Proxy securing
     access to the **Orion** microservices, it delegates the passing of
     authorization decisions to **Authzforce** PDP
@@ -461,11 +464,11 @@ The `tutorial` container is listening on two ports:
 The `tutorial` container is now secured by **Authzforce**, and is driven by
 environment variables as shown:
 
-| Key                | Value               | Description                                         |
-| ------------------ | ------------------- | --------------------------------------------------- |
-| AUTHZFORCE_ENABLED | `true`              | Flag to enable use of the XACML PDP                 |
-| AUTHZFORCE_URL     | `http://authzforce` | This is URL where the **Authzforce** is found       |
-| AUTHZFORCE_PORT    | `8080`              | Port that **Authzforce** is listening on            |
+| Key                | Value               | Description                                   |
+| ------------------ | ------------------- | --------------------------------------------- |
+| AUTHZFORCE_ENABLED | `true`              | Flag to enable use of the XACML PDP           |
+| AUTHZFORCE_URL     | `http://authzforce` | This is URL where the **Authzforce** is found |
+| AUTHZFORCE_PORT    | `8080`              | Port that **Authzforce** is listening on      |
 
 The other `tutorial` container configuration values described in the YAML file
 have been described in previous tutorials
@@ -520,7 +523,6 @@ reason to be granted access
 -   Mallory - Mallory the malicious attacker
 -   Rob - Rob the Robber
 
-
 <details>
   <summary>
    For more details <b>(Click to expand)</b>
@@ -535,7 +537,6 @@ reason to be granted access
 | manager2   | manager2@test.com         | `test`   |
 | detective1 | detective1@test.com       | `test`   |
 | detective2 | detective2@test.com       | `test`   |
-
 
 | Name    | eMail               | Password |
 | ------- | ------------------- | -------- |
@@ -634,8 +635,8 @@ corresponds to the directory structure uploaded to **Authzforce** on start-up.
 To read information about a domain, and to explore further, make a request to
 the `authzforce-ce/domains/{{domain-id}}` endpoint. The following request
 obtains information about the `gQqnLOnIEeiBFQJCrBIBDA` domain, which has been
-generated using a random key by an external Policy Administration Point in
-this case **Keyrock** has been used as the PAP, and pre-generated the rule sets.
+generated using a random key by an external Policy Administration Point in this
+case **Keyrock** has been used as the PAP, and pre-generated the rule sets.
 
 #### :three: Request
 
@@ -918,8 +919,8 @@ As a reminder, there are three Levels of PDP Access Control:
 
 -   Level 1: _Authentication Access_ - Allow all actions to every signed in user
     and no actions to an anonymous user.
--   Level 2: _Basic Authorization_ - Check which resources and verbs the currently
-    logged in user should have access to
+-   Level 2: _Basic Authorization_ - Check which resources and verbs the
+    currently logged in user should have access to
 -   Level 3: _Advanced Authorization_ - Fine grained control through
     [XACML](https://en.wikipedia.org/wiki/XACML)
 
@@ -932,16 +933,16 @@ Proxy.
 
 ## Advanced Authorization
 
-_Advanced Authorization_ is able to deal with complex rulesets. Permissions are no
-longer merely based on a fixed role, resource and an action, but can be extended
-as necessary.
+_Advanced Authorization_ is able to deal with complex rulesets. Permissions are
+no longer merely based on a fixed role, resource and an action, but can be
+extended as necessary.
 
 For example users in role `XXX` can access URL **starting with** `YYY` provided
 that the HTTP verb **is either** `GET`, `PUT` or `POST`. Such users may also
 `DELETE` **provided that** they were the creator in the first place.
 
-Within the tutorial programmatic example we are using our own trusted instance of
-**Keyrock** - once a user has signed in and obtained an `access_token`, the
+Within the tutorial programmatic example we are using our own trusted instance
+of **Keyrock** - once a user has signed in and obtained an `access_token`, the
 `access_token` can be stored in session and used to retrieve user details on
 demand. All access to the Orion context broker is hidden behind a PEP Proxy.
 Whenever a request is made to Orion, the `access_token` is passed in the header
@@ -985,9 +986,9 @@ the Manager)
 
 ### Obtain Roles and Domain
 
-If a user has logged in, the `access_token` can be used in combination with the `/user` endpoint
-to obtain access permissions to a resource. This example retrieves Bob's permissions to a given
-resource.
+If a user has logged in, the `access_token` can be used in combination with the
+`/user` endpoint to obtain access permissions to a resource. This example
+retrieves Bob's permissions to a given resource.
 
 #### :one::zero: Request
 
@@ -1181,9 +1182,9 @@ function policyDomainRequest(domain, roles, resource, action) {
 
 ### Advanced Authorization - PEP Proxy
 
-Applying _advanced authorization_ within a PEP proxy requires very similar code to
-the programmatic example described above. The **Wilma** generic enabler extracts
-a token from the header supplied by the request and makes a request to
+Applying _advanced authorization_ within a PEP proxy requires very similar code
+to the programmatic example described above. The **Wilma** generic enabler
+extracts a token from the header supplied by the request and makes a request to
 **Keyrock** to obtain further information about the user. A PDP request is then
 made to **Authzforce** to decide whether to proceed.
 
