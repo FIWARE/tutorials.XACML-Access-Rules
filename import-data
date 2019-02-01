@@ -437,3 +437,4 @@ curl -X POST \
   ]
 }'
 
+echo -e " \033[1;32mdone\033[0m"
