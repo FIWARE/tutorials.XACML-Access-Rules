@@ -7,6 +7,8 @@
 <br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
+<!-- prettier-ignore -->
+
 このチュートリアルでは、追加のセキュリティ Generic Enabler の **Authzforce**
 を紹介し、**Keyrock** によって生成されたセキュリティ・ルールにきめ細かい制御を
 追加します。[以前のチュートリアル](https://github.com/Fiware/tutorials.PEP-Proxy)
