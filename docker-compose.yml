@@ -136,7 +136,7 @@ services:
       test: curl --fail -s http://localhost:3005/version || exit 1
 
   authzforce:
-    image: fiware/authzforce-ce-server:release-8.0.1
+    image: fiware/authzforce-ce-server:release-8.1.0
     hostname: authzforce
     container_name: fiware-authzforce
     networks:
