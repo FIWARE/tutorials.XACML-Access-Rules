@@ -572,7 +572,7 @@ curl -X GET \
 
 #### Response
 
-The response lists more information about the domain, including the id used within **Keyrock**
+The response lists more information about the domain, including the ID used within **Keyrock**
 (`tutorial-dckr-site-0000-xpresswebapp`)
 
 ```xml
@@ -594,8 +594,8 @@ The response lists more information about the domain, including the id used with
 
 ### List all PolicySets available within a Domain
 
-To list the generated ids for all of the PolicySets found within a domain make a request to the
-`authzforce-ce/domains/{{domain-id}}/pap/policies` endpoint. The following request obtains a list of a given policy ids
+To list the generated IDs for all of the PolicySets found within a domain make a request to the
+`authzforce-ce/domains/{{domain-id}}/pap/policies` endpoint. The following request obtains a list of a given policy IDs
 found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
 #### :four: Request
@@ -625,7 +625,7 @@ container. This corresponds the named XML files `1.xml`, `2.xml` etc.
 ### List the available revisions of a PolicySet
 
 To list the available revisions of a policy, make a request to the
-`authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}` endpoint. Available policy id are randomly generated,
+`authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}` endpoint. Available policy ID are randomly generated,
 and can be obtained by drilling down using the previous request. The following request obtains a list revision of a
 given policy found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
@@ -711,7 +711,7 @@ being based on level 1 authentication access.
 
 To request a decision from Authzforce, a structured request containing all relevant information must be sent to the
 `domains/{domain-id}/pdp` endpoint. In this case, the Body of the request includes information such as the roles that
-the User has, the application id that is being requested (`tutorial-dckr-site-0000-xpresswebapp`) and the HTTP verb and
+the User has, the application ID that is being requested (`tutorial-dckr-site-0000-xpresswebapp`) and the HTTP verb and
 resource that are being requested ( a GET request on the `/app/price-change` URL). Obviously the information passed in
 the Body can be expanded as the rules become more complex.
 
@@ -933,7 +933,7 @@ associated to the `app-id` are returned.
 
 To request a decision from Authzforce, a structured request containing all relevant information must be sent to the
 `domains/{domain-id}/pdp` endpoint. In this case, the Body of the request includes information such as the roles that
-the User has (`managers-role-0000-0000-000000000000`), the application id that is being requested
+the User has (`managers-role-0000-0000-000000000000`), the application ID that is being requested
 (`tutorial-dckr-site-0000-xpresswebapp`) and the HTTP verb and resource that are being requested ( a POST request on the
 `/v2/entities` URL)
 
