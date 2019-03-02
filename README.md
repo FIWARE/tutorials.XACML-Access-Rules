@@ -525,7 +525,7 @@ making side - the creation and administration of access control policies will be
 A single XACML server can be used to administrate access control policies for multiple applications. **Authzforce** is
 implicitly multi-tenant, in that it allows separate organizations to work on their policies in isolation from one
 another. This is done by separating the security policies for each application into a separate **domain** where they can
-access their own `<PolicySets>`. A domain holds meta data about the secured application along with versions of the
+access their own `<PolicySets>`. A domain holds metadata about the secured application along with versions of the
 policies themselves (effectively a series of files which can be accessed by a file server). The domain management API
 can be used to query **Authzforce** about the domains served and policies held.
 
