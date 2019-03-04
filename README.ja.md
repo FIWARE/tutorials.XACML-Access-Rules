@@ -11,7 +11,7 @@
 
 このチュートリアルでは、追加のセキュリティ Generic Enabler の **Authzforce**
 を紹介し、**Keyrock** によって生成されたセキュリティ・ルールにきめ細かい制御を
-追加します。[以前のチュートリアル](https://github.com/Fiware/tutorials.PEP-Proxy)
+追加します。[以前のチュートリアル](https://github.com/FIWARE/tutorials.PEP-Proxy)
 で作成したエンティティへのアクセスは、XACML アクセス制御ポリシーを使用して構成
 および制御されます。これにより、実行中にアップロードおよび再解釈できる柔軟な
 ルールセットが作成されるため、複雑なビジネス・ルールを作成および変更できます。
@@ -82,7 +82,7 @@
 >
 > — Quran 6.151, Sūrat al-Anʻām
 
-[以前のチュートリアル](https://github.com/Fiware/tutorials.Securing-Access)
+[以前のチュートリアル](https://github.com/FIWARE/tutorials.Securing-Access)
 では、認証に基づく単純なアクセス制御システム (レベル1)、またはロールに基づく
 リソースへの基本的な認可アクセス (レベル2) を紹介しました。これらのポリシーは
 簡単に作成できますが、その中のルールは非常に白と黒で、ルールを相互に依存したり、
@@ -234,10 +234,10 @@ XACML の最初のイントロダクションでは、不要な混乱を避け�
 # アーキテクチャ
 
 このアプリケーションは、
-[以前のチュートリアル](https://github.com/Fiware/tutorials.Securing-Access/)
+[以前のチュートリアル](https://github.com/FIWARE/tutorials.Securing-Access/)
 で作成した既存の在庫管理 およびセンサ・ベースのアプリケーションにレベル3の
 高度な認可のセキュリティを追加し、
-[PEP Proxy](https://github.com/Fiware/tutorials.PEP-Proxy/) の背後にある
+[PEP Proxy](https://github.com/FIWARE/tutorials.PEP-Proxy/) の背後にある
 Context Broker へのアクセスを保護します。
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),
 [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/),
@@ -251,7 +251,7 @@ Context Broker へのアクセスを保護します。
 Orion Context Brokerと IoT Agent はどちらも、オープンソースの
 [MongoDB](https://www.mongodb.com/) テクノロジを使用して、保持している情報を
 永続化します。また、
-[以前のチュートリアル](https://github.com/Fiware/tutorials.IoT-Sensors/)
+[以前のチュートリアル](https://github.com/FIWARE/tutorials.IoT-Sensors/)
 で作成したダミー IoT デバイスも使用します。**Keyrock** は、独自に
 [MySQL](https://www.mysql.com/) データベースを使用しています。
 
@@ -300,7 +300,7 @@ Orion Context Brokerと IoT Agent はどちらも、オープンソースの
 -   HTTP を介して実行されている
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     プロトコルを使用す
-    る[ダミー IoT デバイス](https://github.com/Fiware/tutorials.IoT-Sensors)のセ
+    る[ダミー IoT デバイス](https://github.com/FIWARE/tutorials.IoT-Sensors)のセ
     ットとして機能する Web サーバ。特定のリソースへのアクセスが制限されています
     。
 要素間のやり取りはすべて HTTP リクエストによって開始されるため、
@@ -510,7 +510,7 @@ cd tutorials.XACML-Access-Rules
 
 > **注:** Docker イメージの最初の作成には最大 3 分かかります
 
-[services](https://github.com/Fiware/tutorials.XACML-Access-Rules/blob/master/services)
+[services](https://github.com/FIWARE/tutorials.XACML-Access-Rules/blob/master/services)
 Bash スクリプトを実行することによって、コマンドラインからすべてのサービスを初期
 化することができます :
 
@@ -795,7 +795,7 @@ curl -X GET \
 
 レスポンスには、与えられたリビジョンのフルの `<PolicySet>` が含まれています。
 これは **Authzforce** 内に保持されている
-[ファイル](https://github.com/Fiware/tutorials.XACML-Access-Rules/blob/master/authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/2.xml)
+[ファイル](https://github.com/FIWARE/tutorials.XACML-Access-Rules/blob/master/authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/2.xml)
 のコピーです 。
 
 ```xml
@@ -984,7 +984,7 @@ curl -X POST \
 FIWARE では、スマート・アプリケーション・インフラストラクチャ内の既存の
 セキュリティ・マイクロサービス (IDM および PEP Proxy) に **Authzforce** を
 追加することで、レベル3のアクセス制御を提供できます。アクセス制御レベル1と2は、
-[以前のチュートリアル](https://github.com/Fiware/tutorials.Securing-Access)
+[以前のチュートリアル](https://github.com/FIWARE/tutorials.Securing-Access)
 で取り上げてきましたが、**Keyrock** を単独で使用して、関連する PEP Proxy
 を使用してもしなくても実行できます。
 
@@ -1016,7 +1016,7 @@ PEP Proxy の背後に隠されています。リクエストが Orion に行わ
 
 自分自身を識別するためには、すべてのユーザがアクセス・トークンを
 取得する必要があります。そのためには、
-[以前のチュートリアル](https://github.com/Fiware/tutorials.Securing-Access)
+[以前のチュートリアル](https://github.com/FIWARE/tutorials.Securing-Access)
 で説明した OAuth2 アクセス許可のいずれかを使用する必要があります。
 
 ユーザ資格情報フローを使用してログインするには、`grant_type=password`
@@ -1208,7 +1208,7 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
 ```
 
 各リクエストを Authzforce に提供するための完全なコードはチュートリアルの
-[Git リポジトリ](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/context-provider/lib/azf.js)
+[Git リポジトリ](https://github.com/FIWARE/tutorials.Step-by-Step/blob/master/context-provider/lib/azf.js)
 にあります。提供する実際の情報はビジネス・ユースケースに依存します。
 一時的な情報、レコード間の関係などを含むように拡張できます。
 非常に単純な例ではロールだけが必要です。
