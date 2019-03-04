@@ -417,7 +417,7 @@ The other `tutorial` container configuration values described in the YAML file h
 To start the installation, do the following:
 
 ```console
-git clone git@github.com:Fiware/tutorials.XACML-Access-Rules.git
+git clone git@github.com:FIWARE/tutorials.XACML-Access-Rules.git
 cd tutorials.XACML-Access-Rules
 
 ./services create
