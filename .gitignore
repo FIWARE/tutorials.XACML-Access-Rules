@@ -34,7 +34,6 @@ jspm_packages/
 .npm
 .eslintcache
 *.tgz
-.env
 .next
 
 # Authzforce Domains
