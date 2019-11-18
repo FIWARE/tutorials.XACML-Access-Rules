@@ -94,8 +94,9 @@ extensible and cover any access control scenario.
 ## What is XACML
 
 eXtensible Access Control Markup Language (XACML) is a vendor neutral declarative access control policy language. It was
-created to promote common access control terminology and interoperability.<sup>[1](#footnote1)</sup> The architectural 
-naming conventions for elements such as Policy Execution Point (PEP) and Policy Decision Point (PDP) come from the XACML specifications.
+created to promote common access control terminology and interoperability.<sup>[1](#footnote1)</sup> The architectural
+naming conventions for elements such as Policy Execution Point (PEP) and Policy Decision Point (PDP) come from the XACML
+specifications.
 
 XACML policies are split into a hierarchy of three levels - `<PolicySet>`, `<Policy>` and `<Rule>`, the `<PolicySet>` is
 a collection of `<Policy>` elements each of which contain one or more `<Rule>` elements.
@@ -417,7 +418,7 @@ The other `tutorial` container configuration values described in the YAML file h
 To start the installation, do the following:
 
 ```console
-git clone git@github.com:FIWARE/tutorials.XACML-Access-Rules.git
+git clone https://github.com/FIWARE/tutorials.XACML-Access-Rules.git
 cd tutorials.XACML-Access-Rules
 
 ./services create

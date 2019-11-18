@@ -502,7 +502,7 @@ YAMLファイルに記述されている他の `tutorial` コンテナ設定値�
 インストールを開始するには、次の手順に従います :
 
 ```console
-git clone git@github.com:FIWARE/tutorials.XACML-Access-Rules.git
+git clone https://github.com/FIWARE/tutorials.XACML-Access-Rules.git
 cd tutorials.XACML-Access-Rules
 
 ./services create
