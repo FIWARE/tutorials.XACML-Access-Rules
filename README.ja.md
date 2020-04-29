@@ -267,7 +267,7 @@ Orion Context Brokerと IoT Agent はどちらも、オープンソースの
     [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     フォーマットのダミー IoT デバイスからノース・バウンドの測定値を受信し、
     Context Broker がコンテキスト・エンティティの状態を変更するための
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     リクエストに変換します
 -   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) は、以下を含
     んだ、補完的な ID 管理システムを提供します :
