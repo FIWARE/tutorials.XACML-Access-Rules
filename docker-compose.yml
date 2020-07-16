@@ -125,6 +125,9 @@ services:
     depends_on:
       - keyrock
       - authzforce
+    deploy:
+      restart_policy:
+        condition: on-failure
     ports:
       - "${ORION_PROXY_PORT}:${ORION_PROXY_PORT}" # localhost:1027
     expose:
@@ -139,6 +142,7 @@ services:
       - PEP_PROXY_IDM_PORT=${KEYROCK_PORT}
       - PEP_PROXY_APP_ID=tutorial-dckr-site-0000-xpresswebapp
       - PEP_PROXY_USERNAME=pep_proxy_00000000-0000-0000-0000-000000000000
+      - PEP_PROXY_PUBLIC_PATHS=/version
       - PEP_PASSWORD=test
       - PEP_PROXY_PDP=authzforce
       - PEP_PROXY_AUTH_ENABLED=true
@@ -146,7 +150,8 @@ services:
       - PEP_PROXY_AZF_PROTOCOL=http
       - PEP_PROXY_AZF_HOST=authzforce
       - PEP_PROXY_AZF_PORT=${AUTHZFORCE_PORT}
-  
+    healthcheck:
+      test: curl --fail -s http://orion-proxy:${ORION_PROXY_PORT}/version || exit 1
 
   # Tutorial acts as a series of dummy IoT Sensors over HTTP
   tutorial:
