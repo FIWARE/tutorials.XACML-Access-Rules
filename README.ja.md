@@ -504,6 +504,7 @@ YAMLファイルに記述されている他の `tutorial` コンテナ設定値�
 ```console
 git clone https://github.com/FIWARE/tutorials.XACML-Access-Rules.git
 cd tutorials.XACML-Access-Rules
+git checkout NGSI-v2
 
 ./services create
 ```
