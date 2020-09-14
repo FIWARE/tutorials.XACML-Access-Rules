@@ -511,7 +511,7 @@ git checkout NGSI-v2
 
 > **注:** Docker イメージの最初の作成には最大 3 分かかります
 
-[services](https://github.com/FIWARE/tutorials.XACML-Access-Rules/blob/master/services)
+[services](https://github.com/FIWARE/tutorials.XACML-Access-Rules/blob/NGSI-v2/services)
 Bash スクリプトを実行することによって、コマンドラインからすべてのサービスを初期
 化することができます :
 
@@ -796,7 +796,7 @@ curl -X GET \
 
 レスポンスには、与えられたリビジョンのフルの `<PolicySet>` が含まれています。
 これは **Authzforce** 内に保持されている
-[ファイル](https://github.com/FIWARE/tutorials.XACML-Access-Rules/blob/master/authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/2.xml)
+[ファイル](https://github.com/FIWARE/tutorials.XACML-Access-Rules/blob/NGSI-v2/authzforce/domains/gQqnLOnIEeiBFQJCrBIBDA/policies/ZjgxOTRhZjUtOGEwNy00ODZhLTk1ODEtYzFmMDVkMDU0ODNj/2.xml)
 のコピーです 。
 
 ```xml
