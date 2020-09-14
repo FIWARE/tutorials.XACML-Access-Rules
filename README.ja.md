@@ -300,7 +300,7 @@ Orion Context Brokerと IoT Agent はどちらも、オープンソースの
 -   HTTP を介して実行されている
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     プロトコルを使用す
-    る[ダミー IoT デバイス](https://github.com/FIWARE/tutorials.IoT-Sensors)のセ
+    る[ダミー IoT デバイス](https://github.com/FIWARE/tutorials.IoT-Sensors/tree/NGSI-v2)のセ
     ットとして機能する Web サーバ。特定のリソースへのアクセスが制限されています
     。
 要素間のやり取りはすべて HTTP リクエストによって開始されるため、
