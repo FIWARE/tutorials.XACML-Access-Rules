@@ -116,7 +116,8 @@ services:
 
   # PEP Proxy
   orion-proxy:
-    image: fiware/pep-proxy:${WILMA_VERSION}
+    image: fiware/pep-proxy
+    #:${WILMA_VERSION}
     container_name: fiware-orion-proxy
     hostname: orion-proxy
     networks:
