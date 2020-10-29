@@ -78,7 +78,7 @@
             <AnyOf>
                <AllOf>
                   <Match MatchId="urn:oasis:names:tc:xacml:3.0:function:string-starts-with">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/v2/entities</AttributeValue>
+                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/ngsi-ld/v1/entities</AttributeValue>
                      <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
                   </Match>
                </AllOf>
@@ -199,7 +199,7 @@
             <AnyOf>
                <AllOf>
                   <Match MatchId="urn:oasis:names:tc:xacml:3.0:function:string-starts-with">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/v2/entities</AttributeValue>
+                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/ngsi-ld/v1/entities</AttributeValue>
                      <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
                   </Match>
                </AllOf>
