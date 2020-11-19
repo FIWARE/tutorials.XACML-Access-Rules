@@ -236,7 +236,8 @@ Therefore the overall architecture will consist of the following elements:
     -   Allows users to "buy" products and reduce the stock count.
     -   Allows authorized users into restricted areas, it also delegates authorization decisions to the **Authzforce**
         PDP
--   A webserver acting as set of [dummy IoT devices](https://github.com/FIWARE/tutorials.IoT-Sensors/tree/NGSI-v2) using the
+-   A webserver acting as set of [dummy IoT devices](https://github.com/FIWARE/tutorials.IoT-Sensors/tree/NGSI-v2) using
+    the
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over HTTP - access to certain resources is restricted.
 
@@ -1002,15 +1003,15 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
 
     return oa
         .get(keyrockUserUrl)
-        .then(response => {
+        .then((response) => {
             const user = JSON.parse(response);
             return azf.policyDomainRequest(user.app_azf_domain, user.roles, resource, req.method);
         })
-        .then(authzforceResponse => {
+        .then((authzforceResponse) => {
             res.locals.authorized = authzforceResponse === "Permit";
             return next();
         })
-        .catch(error => {
+        .catch((error) => {
             debug(error);
             res.locals.authorized = false;
             return next();
@@ -1042,9 +1043,9 @@ function policyDomainRequest(domain, roles, resource, action) {
     };
 
     return new Promise((resolve, reject) => {
-        request(options, function(error, response, body) {
+        request(options, function (error, response, body) {
             let decision;
-            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function(err, jsonRes) {
+            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function (err, jsonRes) {
                 // The decision is found within the /Response/Result[0]/Decision[0] XPath
                 decision = jsonRes.Response.Result[0].Decision[0];
             });
