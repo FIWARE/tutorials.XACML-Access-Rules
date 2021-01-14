@@ -97,7 +97,6 @@ services:
     secrets:
       - my_secret_data
     healthcheck:
-      test: curl --fail -s http://keyrock:${KEYROCK_PORT}/version || exit 1
       interval: 5s
 
   # Authzforce is a XACML Server PDP
