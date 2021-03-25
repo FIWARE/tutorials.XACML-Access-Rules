@@ -102,7 +102,7 @@ services:
 
   # Authzforce is a XACML Server PDP
   authzforce:
-    image: fiware/authzforce-ce-server:${AUTHZFORCE_VERSION}
+    image: fiware/authzforce-ce-server:release-8.1.0
     hostname: authzforce
     container_name: fiware-authzforce
     networks:
