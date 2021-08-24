@@ -448,7 +448,7 @@ authzforce:
 ```yaml
 tutorial:
     image: fiware/tutorials.context-provider
-    hostname: tutorial
+    hostname: iot-sensors
     container_name: fiware-tutorial
     networks:
         default:
