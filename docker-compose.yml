@@ -16,10 +16,12 @@
 # 
 # see: https://github.com/FIWARE/helm-charts/
 #
-version: "3.5"
+version: "3.8"
 services:
   # Orion is the context broker
   orion:
+    labels:
+      org.fiware: 'tutorial'
     image: fiware/orion:${ORION_VERSION}
     hostname: orion
     container_name: fiware-orion
@@ -39,6 +41,8 @@ services:
 
   # IoT-Agent is configured for the UltraLight Protocol
   iot-agent:
+    labels:
+      org.fiware: 'tutorial'
     image: fiware/iotagent-ul:${ULTRALIGHT_VERSION}
     hostname: iot-agent
     container_name: fiware-iot-agent
@@ -70,6 +74,8 @@ services:
 
   # Keyrock is an Identity Management Front-End
   keyrock:
+    labels:
+      org.fiware: 'tutorial'
     image: fiware/idm:${KEYROCK_VERSION}
     container_name: fiware-keyrock
     hostname: keyrock
@@ -102,8 +108,9 @@ services:
 
   # Authzforce is a XACML Server PDP
   authzforce:
+    labels:
+      org.fiware: 'tutorial'
     image: fiware/authzforce-ce-server:release-8.1.0
-    hostname: authzforce
     container_name: fiware-authzforce
     networks:
       default:
@@ -118,6 +125,8 @@ services:
 
   # PEP Proxy
   orion-proxy:
+    labels:
+      org.fiware: 'tutorial'
     image: fiware/pep-proxy:${WILMA_VERSION}
     container_name: fiware-orion-proxy
     hostname: orion-proxy
@@ -161,6 +170,8 @@ services:
 
   # Tutorial acts as a series of dummy IoT Sensors over HTTP
   tutorial:
+    labels:
+      org.fiware: 'tutorial'
     image: fiware/tutorials.context-provider
     hostname: iot-sensors
     container_name: fiware-tutorial
@@ -210,6 +221,8 @@ services:
 
   # Databases
   mongo-db:
+    labels:
+      org.fiware: 'tutorial'
     image: mongo:${MONGO_DB_VERSION}
     hostname: mongo-db
     container_name: db-mongo
@@ -230,6 +243,8 @@ services:
 
   mysql-db:
     restart: always
+    labels:
+      org.fiware: 'tutorial'
     image: mysql:${MYSQL_DB_VERSION}
     hostname: mysql-db
     container_name: db-mysql
@@ -250,6 +265,8 @@ services:
       - my_secret_data
 networks:
   default:
+    labels:
+      org.fiware: 'tutorial'
     ipam:
       config:
         - subnet: 172.18.1.0/24
