@@ -3,9 +3,8 @@
 [![FIWARE Security](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/security.svg)](https://github.com/FIWARE/catalogue/blob/master/security/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.XACML-Access-Rules.svg)](https://opensource.org/licenses/MIT)
 [![Support badge](https://img.shields.io/badge/tag-fiware-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware)
-[![FIWARE Security](https://img.shields.io/badge/XACML-3.0-ff7059.svg)](https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html)
-<br/>
-[![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
+[![XACML 3.0](https://img.shields.io/badge/XACML-3.0-ff7059.svg)](https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html)
+<br/> [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
 <!-- prettier-ignore -->
 
@@ -25,7 +24,7 @@
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/724e8e1ab1af11063d15)
 
-# コンテンツ
+## コンテンツ
 
 <details>
 <summary>詳細 <b>(クリックして拡大)</b></summary>
@@ -61,6 +60,7 @@
         -   [高度な認可 - サンプル・コード](#advanced-authorization---sample-code)
         -   [高度な認可 - PEP Proxy](#advanced-authorization---pep-proxy)
     -   [PDP - 高度な許可 - 例の実行](#pdp---advanced-authorization---running-the-example)
+-   [次のステップ](#next-steps)
 
 </details>
 
@@ -1179,28 +1179,19 @@ Authzforce が判断を下すために必要なすべての情報が提供され
 ```javascript
 function authorizeAdvancedXACML(req, res, next, resource = req.url) {
     const keyrockUserUrl =
-        "http://keyrock/user?access_token=" +
-        req.session.access_token +
-        "&app_id=" +
-        clientId +
-        "&authzforce=true";
+        "http://keyrock/user?access_token=" + req.session.access_token + "&app_id=" + clientId + "&authzforce=true";
 
     return oa
         .get(keyrockUserUrl)
-        .then(response => {
+        .then((response) => {
             const user = JSON.parse(response);
-            return azf.policyDomainRequest(
-                user.app_azf_domain,
-                user.roles,
-                resource,
-                req.method
-            );
+            return azf.policyDomainRequest(user.app_azf_domain, user.roles, resource, req.method);
         })
-        .then(authzforceResponse => {
+        .then((authzforceResponse) => {
             res.locals.authorized = authzforceResponse === "Permit";
             return next();
         })
-        .catch(error => {
+        .catch((error) => {
             debug(error);
             res.locals.authorized = false;
             return next();
@@ -1233,16 +1224,12 @@ function policyDomainRequest(domain, roles, resource, action) {
     };
 
     return new Promise((resolve, reject) => {
-        request(options, function(error, response, body) {
+        request(options, function (error, response, body) {
             let decision;
-            xml2js.parseString(
-                body,
-                { tagNameProcessors: [xml2js.processors.stripPrefix] },
-                function(err, jsonRes) {
-                    // The decision is found within the /Response/Result[0]/Decision[0] XPath
-                    decision = jsonRes.Response.Result[0].Decision[0];
-                }
-            );
+            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function (err, jsonRes) {
+                // The decision is found within the /Response/Result[0]/Decision[0] XPath
+                decision = jsonRes.Response.Result[0].Decision[0];
+            });
             decision = String(decision);
             return error ? reject(error) : resolve(decision);
         });
@@ -1332,6 +1319,8 @@ Charlie は、the **security** ロールを持っています
     -   ベルを鳴らす - アクセスが**許可**されます -
         これは security ユーザに許可されます
 
+<a name="next-steps"></a>
+
 # 次のステップ
 
 高度な機能を追加することで、アプリケーションに複雑さを加える方法を知りたいですか
@@ -1343,4 +1332,12 @@ Charlie は、the **security** ロールを持っています
 
 ## License
 
-[MIT](LICENSE) © 2018-2020 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2018-2022 FIWARE Foundation e.V.
+
+---
+
+### Footnotes
+
+<a name="footnote1"></a>
+
+-   [Wikipedia: XACML](https://en.wikipedia.org/wiki/XACML) - "eXtensible Access Control Markup Language" の略です。
