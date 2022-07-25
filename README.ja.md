@@ -23,6 +23,7 @@
 が利用できます。
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/724e8e1ab1af11063d15)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/FIWARE/tutorials.XACML-Access-Rules/tree/NGSI-v2)
 
 ## コンテンツ
 
