@@ -101,6 +101,7 @@ services:
       - IDM_AUTHZFORCE_ENABLED=true
       - IDM_AUTHZFORCE_HOST=authzforce
       - IDM_AUTHZFORCE_PORT=${AUTHZFORCE_PORT}
+      - IDM_CSP_FORM_ACTION=*
     secrets:
       - my_secret_data
     healthcheck:
