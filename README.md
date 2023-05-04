@@ -270,7 +270,7 @@ The specific architecture of each section of the tutorial is discussed below.
 
 ```yaml
 keyrock:
-    image: fiware/idm
+    image: quay.io/fiware/idm
     container_name: fiware-keyrock
     hostname: keyrock
     networks:
@@ -318,7 +318,7 @@ The other `keyrock` container configuration values described in the YAML file ha
 
 ```yaml
 orion-proxy:
-    image: fiware/pep-proxy
+    image: quay.io/fiware/pep-proxy
     container_name: fiware-orion-proxy
     hostname: orion-proxy
     networks:
@@ -371,7 +371,7 @@ tutorials
 
 ```yaml
 authzforce:
-    image: fiware/authzforce-ce-server
+    image: quay.io/fiware/authzforce-ce-server
     hostname: authzforce
     container_name: fiware-authzforce
     networks:
@@ -390,7 +390,7 @@ been exposed to upload a pre-configured domain so that a set of XACML access con
 
 ```yaml
 tutorial:
-    image: fiware/tutorials.context-provider
+    image: quay.io/fiware/tutorials.context-provider
     hostname: iot-sensors
     container_name: fiware-tutorial
     networks:

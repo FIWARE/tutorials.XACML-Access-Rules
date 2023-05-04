@@ -318,7 +318,7 @@ Orion Context Brokerと IoT Agent はどちらも、オープンソースの
 
 ```yaml
 keyrock:
-    image: fiware/idm
+    image: quay.io/fiware/idm
     container_name: fiware-keyrock
     hostname: keyrock
     networks:
@@ -373,7 +373,7 @@ YAML ファイルに記述されている他の `keyrock`
 
 ```yaml
 orion-proxy:
-    image: fiware/pep-proxy
+    image: quay.io/fiware/pep-proxy
     container_name: fiware-orion-proxy
     hostname: orion-proxy
     networks:
@@ -425,7 +425,7 @@ YAML ファイルに記述されている他の `orion-proxy` コンテナの設
 
 ```yaml
 authzforce:
-    image: fiware/authzforce-ce-server
+    image: quay.io/fiware/authzforce-ce-server
     hostname: authzforce
     container_name: fiware-authzforce
     networks:
@@ -448,7 +448,7 @@ authzforce:
 
 ```yaml
 tutorial:
-    image: fiware/tutorials.context-provider
+    image: quay.io/fiware/tutorials.context-provider
     hostname: iot-sensors
     container_name: fiware-tutorial
     networks:
