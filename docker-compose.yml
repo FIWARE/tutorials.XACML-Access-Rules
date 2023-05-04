@@ -111,7 +111,7 @@ services:
   authzforce:
     labels:
       org.fiware: 'tutorial'
-    image: quay.io/fiware/authzforce-ce-server:release-8.1.0
+    image: fiware/authzforce-ce-server:release-8.1.0
     container_name: fiware-authzforce
     networks:
       default:

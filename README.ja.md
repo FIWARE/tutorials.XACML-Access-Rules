@@ -425,7 +425,7 @@ YAML ファイルに記述されている他の `orion-proxy` コンテナの設
 
 ```yaml
 authzforce:
-    image: quay.io/fiware/authzforce-ce-server
+    image: fiware/authzforce-ce-server
     hostname: authzforce
     container_name: fiware-authzforce
     networks:
