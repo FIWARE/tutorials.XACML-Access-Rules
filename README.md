@@ -444,7 +444,8 @@ git checkout NGSI-v2
 ./services create
 ```
 
-> **Note** The initial creation of Docker images can take up to three minutes
+> [!NOTE]
+> The initial creation of Docker images can take up to three minutes
 
 Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/FIWARE/tutorials.XACML-Access-Rules/blob/NGSI-v2/services) Bash script provided within the
@@ -1110,7 +1111,8 @@ making unnecessary requests.
 
 ## PDP - Advanced Authorization - Running the Example
 
-> **Note** Five resources have been secured at level 3:
+> [!NOTE]
+> Five resources have been secured at level 3:
 >
 > -   sending the unlock door command
 > -   sending the ring bell command
@@ -1122,7 +1124,8 @@ making unnecessary requests.
 
 Eve has an account, but no roles in the application.
 
-> **Note** As Eve has a recognized account, she gains full authentication access. This means she is able to _view_ the
+> [!NOTE]
+>  As Eve has a recognized account, she gains full authentication access. This means she is able to _view_ the
 > Store page, even though her account has no roles attached.
 
 -   From `http://localhost:3000`, log in as `eve@example.com` with the password `test`
