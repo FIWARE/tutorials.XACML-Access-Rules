@@ -454,7 +454,8 @@ repository:
 ./services start
 ```
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> [!NOTE]
+>  If you want to clean up and start over again you can do so with the following command:
 >
 > ```console
 > ./services stop
@@ -507,7 +508,7 @@ Once **Authzforce** is running, you can check the status by making an HTTP reque
 (usually `8080`). If the response is blank, this is usually because **Authzforce** is not running or is listening on
 another port.
 
-#### :one: Request
+#### 1️⃣ Request
 
 ```console
 curl -X GET \
@@ -556,7 +557,7 @@ can be used to query **Authzforce** about the domains served and policies held.
 
 To request domain information from **Authzforce**, make a request to the `/authzforce-ce/domains` endpoint.
 
-#### :two: Request
+#### 2️⃣ Request
 
 ```console
 curl -X GET \
@@ -588,7 +589,7 @@ endpoint. The following request obtains information about the `gQqnLOnIEeiBFQJCr
 using a random key by an external Policy Administration Point in this case **Keyrock** has been used as the PAP, and
 pre-generated the rule sets.
 
-#### :three: Request
+#### 3️⃣ Request
 
 ```console
 curl -X GET \
@@ -624,7 +625,7 @@ To list the generated IDs for all of the PolicySets found within a domain make a
 `authzforce-ce/domains/{{domain-id}}/pap/policies` endpoint. The following request obtains a list of a given policy IDs
 found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
-#### :four: Request
+#### 4️⃣ Request
 
 ```console
 curl -X GET \
@@ -657,7 +658,7 @@ To list the available revisions of a policy, make a request to the
 and can be obtained by drilling down using the previous request. The following request obtains a list revision of a
 given policy found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
-#### :five: Request
+#### 5️⃣ Request
 
 ```console
 curl -X GET \
@@ -689,7 +690,7 @@ To obtain a single revision of a `<PolicySet>`, make a request to the
 `authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}/{{revision-number}}` endpoint. The following request
 obtains the second revision of the given policy found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
-#### :six: Request
+#### 6️⃣ Request
 
 ```console
 curl -X GET \
@@ -758,7 +759,7 @@ the Body can be expanded as the rules become more complex.
 To request a decision from Authzforce, make a POST request to the `domains/{domain-id}/pdp` endpoint. In this case the
 user has the `managers-role-0000-0000-000000000000` and is requesting access the `/app/price-change` resource.
 
-#### :seven: Request
+#### 7️⃣  Request
 
 ```console
 curl -X POST \
@@ -813,7 +814,7 @@ successful request includes a `<Decision>` element to `Permit` access to the res
 To request a decision from Authzforce, make a POST request to the `domains/{domain-id}/pdp` endpoint. In this case the
 user has the `security-role-0000-0000-000000000000` and is requesting access the `/app/price-change` resource.
 
-#### :eight: Request
+#### 8️⃣  Request
 
 ```console
 curl -X POST \
@@ -898,7 +899,7 @@ OAuth2 access grants described in a [previous tutorial](https://github.com/FIWAR
 To log in using the user-credentials flow send a POST request to the `oauth2/token` endpoint of **Keyrock** with the
 `grant_type=password`
 
-#### :nine: Request
+#### 9️⃣ Request
 
 ```console
 curl -X POST \
@@ -928,7 +929,7 @@ The response returns an `access_token` to identify the user (in this case Bob th
 If a user has logged in, the `access_token` can be used in combination with the `/user` endpoint to obtain access
 permissions to a resource. This example retrieves Bob's permissions to a given resource.
 
-#### :one::zero: Request
+#### 1️⃣0️⃣ Request
 
 ```console
 curl -X GET \
@@ -979,7 +980,7 @@ the User has (`managers-role-0000-0000-000000000000`), the application ID that i
 (`tutorial-dckr-site-0000-xpresswebapp`) and the HTTP verb and resource that are being requested ( a POST request on the
 `/v2/entities` URL)
 
-#### :one::one: Request
+#### 1️⃣1️⃣ Request
 
 ```console
 curl -X POST \

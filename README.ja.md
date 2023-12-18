@@ -583,7 +583,7 @@ Bash スクリプトを実行することによって、コマンドラインか
 場合、これは通常 **Authzforce** が実行されていないか別のポートで待機している
 ためです。
 
-#### :one: リクエスト
+#### 1️⃣ リクエスト
 
 ```console
 curl -X GET \
@@ -644,7 +644,7 @@ API を提供する必要があります。このチュートリアルは主に�
 **Authzforce** にドメイン情報をリクエストするには、
 `/authzforce-ce/domains` エンドポイントにリクエストを出します。
 
-#### :two: リクエスト
+#### 2️⃣ リクエスト
 
 ```console
 curl -X GET \
@@ -678,7 +678,7 @@ curl -X GET \
 この場合、**Keyrock** が PAP として使用され、
 ルールセットが事前に生成されています。
 
-#### :three: リクエスト
+#### 3️⃣ リクエスト
 
 ```console
 curl -X GET \
@@ -716,7 +716,7 @@ curl -X GET \
 リクエストを出します。次のリクエストは、`gQqnLOnIEeiBFQJCrBIBDA`
 ドメイン内で見つかった特定ポリシーの ids のリストを取得します。
 
-#### :four: リクエスト
+#### 4️⃣ リクエスト
 
 ```console
 curl -X GET \
@@ -752,7 +752,7 @@ curl -X GET \
 次のリクエストは、`gQqnLOnIEeiBFQJCrBIBDA` ドメイン内で見つかった特定ポリシー
 のリビジョンのリストを取得します。
 
-#### :five: リクエスト
+#### 5️⃣ リクエスト
 
 ```console
 curl -X GET \
@@ -786,7 +786,7 @@ curl -X GET \
 エンドポイントにリクエストを出します。次のリクエストは、`gQqnLOnIEeiBFQJCrBIBDA`
 ドメイン内で見つかった特定のポリシーの2番目のリビジョンを取得します。
 
-#### :six: リクエスト
+#### 6️⃣ リクエスト
 
 ```console
 curl -X GET \
@@ -861,7 +861,7 @@ GET リクエスト) などの情報が含まれています。明らかに、�
 `managers-role-0000-0000-000000000000` を持ち、
 リソース `/app/price-change` へのアクセスをリクエストしています。
 
-#### :seven: リクエスト
+#### 7️⃣  リクエスト
 
 ```console
 curl -X POST \
@@ -920,7 +920,7 @@ curl -X POST \
 を持ち、リソース `/app/price-change` へのアクセスをリクエスト
 しています。
 
-#### :eight: リクエスト
+#### 8️⃣  リクエスト
 
 ```console
 curl -X POST \
@@ -1025,7 +1025,7 @@ PEP Proxy の背後に隠されています。リクエストが Orion に行わ
 を指定して **Keyrock** の `oauth2/token` エンドポイントに POST
 リクエストを送信します。
 
-#### :nine: リクエスト
+#### 9️⃣ リクエスト
 
 ```console
 curl -X POST \
@@ -1059,7 +1059,7 @@ curl -X POST \
 リソースへのアクセス許可を得るために使用できます。
 この例では、特定のリソースに対する Bob の権限を取得します。
 
-#### :one::zero: リクエスト
+#### 1️⃣0️⃣ リクエスト
 
 ```console
 curl -X GET \
@@ -1116,7 +1116,7 @@ curl -X GET \
 id (`tutorial-dckr-site-0000-xpresswebapp`)、リクエストされている HTTP 動詞と
 リソース (`/v2/entities` URL に対する POST リクエスト) などの情報が含まれます。
 
-#### :one::one: リクエスト
+#### 1️⃣1️⃣ リクエスト
 
 ```console
 curl -X POST \
