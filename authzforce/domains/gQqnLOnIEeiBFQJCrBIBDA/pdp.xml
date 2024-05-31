@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<pdp xmlns="http://authzforce.github.io/core/xmlns/pdp/6.0" version="6.0.0" enableXPath="false" strictAttributeIssuerMatch="false" maxVariableRefDepth="10" maxPolicyRefDepth="10">
-    <refPolicyProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://authzforce.github.io/pap-dao-flat-file/xmlns/pdp-ext/3.6" xsi:type="ns3:StaticFlatFileDAORefPolicyProvider" policyLocationPattern="${PARENT_DIR}/policies/*.xml" id="refPolicyProvider"/>
-    <rootPolicyProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="StaticRefBasedRootPolicyProvider" id="rootPolicyProvider">
-        <policyRef>f8194af5-8a07-486a-9581-c1f05d05483c</policyRef>
-    </rootPolicyProvider>
-</pdp>
