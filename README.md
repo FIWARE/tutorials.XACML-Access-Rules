@@ -450,6 +450,7 @@ git checkout NGSI-v2
 ```
 
 > [!NOTE]
+>
 > The initial creation of Docker images can take up to three minutes
 
 Thereafter, all services can be initialized from the command-line by running the
@@ -461,7 +462,8 @@ repository:
 ```
 
 > [!NOTE]
->  If you want to clean up and start over again you can do so with the following command:
+>
+> If you want to clean up and start over again you can do so with the following command:
 >
 > ```console
 > ./services stop
@@ -765,7 +767,7 @@ the Body can be expanded as the rules become more complex.
 To request a decision from Authzforce, make a POST request to the `domains/{domain-id}/pdp` endpoint. In this case the
 user has the `managers-role-0000-0000-000000000000` and is requesting access the `/app/price-change` resource.
 
-#### 7️⃣  Request
+#### 7️⃣ Request
 
 ```console
 curl -X POST \
@@ -820,7 +822,7 @@ successful request includes a `<Decision>` element to `Permit` access to the res
 To request a decision from Authzforce, make a POST request to the `domains/{domain-id}/pdp` endpoint. In this case the
 user has the `security-role-0000-0000-000000000000` and is requesting access the `/app/price-change` resource.
 
-#### 8️⃣  Request
+#### 8️⃣ Request
 
 ```console
 curl -X POST \
@@ -1117,6 +1119,7 @@ making unnecessary requests.
 ## PDP - Advanced Authorization - Running the Example
 
 > [!NOTE]
+>
 > Five resources have been secured at level 3:
 >
 > -   sending the unlock door command
@@ -1130,8 +1133,9 @@ making unnecessary requests.
 Eve has an account, but no roles in the application.
 
 > [!NOTE]
->  As Eve has a recognized account, she gains full authentication access. This means she is able to _view_ the
-> Store page, even though her account has no roles attached.
+>
+> As Eve has a recognized account, she gains full authentication access. This means she is able to _view_ the Store
+> page, even though her account has no roles attached.
 
 -   From `http://localhost:3000`, log in as `eve@example.com` with the password `test`
 
