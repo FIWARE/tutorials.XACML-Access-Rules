@@ -239,7 +239,7 @@ XACML の最初のイントロダクションでは、不要な混乱を避け�
 [PEP Proxy](https://github.com/FIWARE/tutorials.PEP-Proxy/) の背後にある
 Context Broker へのアクセスを保護します。
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),
-[IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/),
+[IoT Agent for JSON](https://fiware-iotagent-json.readthedocs.io/en/latest/),
 [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Identity Manager,
 [Wilma](https://fiware-pep-proxy.readthedocs.io/en/latest/) PEP Proxy,
 [Authzforce](https://authzforce-ce-fiware.readthedocs.io) XACML Server
@@ -261,9 +261,9 @@ Orion Context Brokerと IoT Agent はどちらも、オープンソースの
     、[NGSI](https://fiware.github.io/specifications/ngsiv2/latest/) を使用
     してリクエストを受信します
 -   FIWARE
-    [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/)
+    [IoT Agent for JSON](https://fiware-iotagent-json.readthedocs.io/en/latest/)
     は、
-    [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+    [JSON](https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     フォーマットのダミー IoT デバイスからノース・バウンドの測定値を受信し、
     Context Broker がコンテキスト・エンティティの状態を変更するための
     [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
@@ -297,7 +297,7 @@ Orion Context Brokerと IoT Agent はどちらも、オープンソースの
     -   許可されたユーザを制限されたエリアに入れることができます。認可の決定を
         **Authzforce** PDP に委任します
 -   HTTP を介して実行されている
-    [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+    [JSON](https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     プロトコルを使用す
     る[ダミー IoT デバイス](https://github.com/FIWARE/tutorials.IoT-Sensors/tree/NGSI-v2)のセ
     ットとして機能する Web サーバ。特定のリソースへのアクセスが制限されています
